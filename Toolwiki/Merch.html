@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Toolwiki Merch – Official Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CSS CDN (replace with your build pipeline if needed) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans">
+
+  <!-- Page wrapper -->
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Top nav (optional, match your existing site) -->
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <!-- Logo text (you can swap for SVG) -->
+          <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+            Toolwiki
+          </span>
+          <span class="text-xs text-slate-400 uppercase tracking-[0.2em]">
+            Merch
+          </span>
+        </div>
+        <nav class="flex items-center gap-6 text-sm">
+  <a href="index.html" class="text-slate-400 hover:text-slate-100 transition">Home</a>
+  <a href="tools.html" class="text-slate-400 hover:text-slate-100 transition">Utilities</a>
+  <a href="merch.html" class="text-cyan-400 font-semibold">Merch</a>
+</nav>
+
+      </div>
+    </header>
+
+    <!-- Hero section -->
+    <main class="flex-1">
+      <section class="border-b border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <div class="max-w-6xl mx-auto px-4 py-12 lg:py-16 grid lg:grid-cols-2 gap-10 items-center">
+          <!-- Text -->
+          <div class="space-y-6">
+            <p class="text-xs font-semibold tracking-[0.25em] text-cyan-400 uppercase">
+              Official Toolwiki Gear
+            </p>
+            <h1 class="text-3xl lg:text-4xl font-bold tracking-tight">
+              Wear the wisdom.<br />
+              <span class="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                Represent Toolwiki.
+              </span>
+            </h1>
+            <p class="text-sm lg:text-base text-slate-300 max-w-lg">
+              Built for makers, fixers, and everyday problem-solvers. 
+              Toolwiki merch brings the same energy as your favorite utilities—clean, bold, and ready for daily use.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="#products" class="inline-flex items-center px-5 py-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-sm font-semibold shadow-lg shadow-cyan-500/30 transition">
+                Shop Now
+              </a>
+              <a href="#story" class="inline-flex items-center px-5 py-2.5 rounded-full border border-slate-700 text-slate-200 text-sm hover:border-cyan-400 hover:text-cyan-300 transition">
+                Why Toolwiki Merch?
+              </a>
+            </div>
+            <p class="text-xs text-slate-500">
+              Secure checkout · Print-on-demand quality · Designed for daily life
+            </p>
+          </div>
+
+          <!-- Hero image placeholder (replace with your merch image) -->
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl border border-slate-800 bg-slate-900/60 flex items-center justify-center overflow-hidden">
+              <!-- Replace this with <img src="your-merch-image.jpg" ...> -->
+              <div class="aspect-[4/3] rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+  <img src="images/Merch1.png" 
+       alt="Toolwiki Merch Spread" 
+       class="w-full h-full object-cover">
+</div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+     
+
+      <!-- Brand story / social proof -->
+      <section id="story" class="border-t border-slate-800 bg-slate-950">
+        <div class="max-w-6xl mx-auto px-4 py-10 lg:py-14 grid lg:grid-cols-2 gap-10">
+          <div class="space-y-4">
+            <h2 class="text-xl lg:text-2xl font-semibold tracking-tight">
+              Why Toolwiki Merch?
+            </h2>
+            <p class="text-sm text-slate-300">
+              Toolwiki started with a simple idea: <span class="font-semibold">quick, free utilities for daily life</span>.
+              The merch line extends that same philosophy into what you wear and use every day—clean, functional, and unapologetically techy.
+            </p>
+            <p class="text-sm text-slate-300">
+              Every piece is designed to feel like part of your workflow: hoodies for late-night debugging, mugs for early-morning planning, 
+              and desk gear that makes your setup look as sharp as the tools you use.
+            </p>
+            <p class="text-xs text-slate-500">
+              Limited drops · Print-on-demand · Designed for creators, builders, and problem-solvers.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-sm font-semibold text-slate-200">
+              Community & Social Proof
+            </h3>
+            <div class="space-y-3 text-xs text-slate-300">
+              <p>“The hoodie is my go-to for late-night coding sessions.”</p>
+              <p>“Love the logo—clean, modern, and instantly recognizable.”</p>
+              <p>“Mouse pad + mug combo makes my desk feel like a mini Toolwiki HQ.”</p>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">
+              Tag your setup with <span class="text-cyan-400 font-semibold">#ToolwikiGear</span> for a chance to be featured.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950">
+      <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© <span id="year"></span> Toolwiki. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <span>Secure checkout</span>
+          <span>•</span>
+          <span>Powered by your favorite utilities.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Simple year script
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
