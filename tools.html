@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Toolwiki Utilities</title>
-  
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
-     crossorigin="anonymous"></script>
-  
+
+  <!-- Viewport for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -15,9 +15,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5/dist/body-pix.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
   <style>
-    input, select, textarea {
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    input,
+    select,
+    textarea {
       background-color: #1e293b;
       color: #ffffff;
       border: 1px solid #334155;
@@ -30,7 +37,9 @@
       color: #94a3b8;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       outline: none;
       box-shadow: 0 0 0 2px #6366f1;
     }
@@ -40,74 +49,117 @@
     }
 
     @keyframes pulseGlow {
-      0% { filter: drop-shadow(0 0 10px rgba(99,102,241,0.3)); }
-      50% { filter: drop-shadow(0 0 25px rgba(99,102,241,0.7)); }
-      100% { filter: drop-shadow(0 0 10px rgba(99,102,241,0.3)); }
+      0% { filter: drop-shadow(0 0 10px rgba(56,189,248,0.3)); }
+      50% { filter: drop-shadow(0 0 25px rgba(56,189,248,0.8)); }
+      100% { filter: drop-shadow(0 0 10px rgba(56,189,248,0.3)); }
     }
 
-    .tool-ui { display: none; }
+    .tool-ui {
+      display: none;
+    }
+
+    .tool-card {
+      background-color: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .tool-card button {
+      transition: all 0.2s ease;
+    }
+
+    .tool-card button:active {
+      transform: scale(0.97);
+      filter: brightness(1.2);
+    }
+
+    .status-glow {
+      animation: glowPulse 1.5s infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    .tool-slide {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.35s ease;
+    }
+
+    .tool-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
   <!-- Navbar -->
-  <nav class="w-full bg-slate-800 border-b border-slate-700 px-6 py-4 flex justify-between items-center">
+  <nav class="w-full bg-slate-800 border-b border-slate-700 px-4 md:px-6 py-3 md:py-4 flex flex-wrap justify-between items-center gap-3">
     <div class="flex items-center gap-4">
       <a href="index.html" class="text-slate-200 hover:text-white font-semibold">Home</a>
-      <a href="Merch.html" class="text-slate-200 hover:text-white font-semibold">Merch</a>
+      <a href="merch.html" class="text-slate-200 hover:text-white font-semibold">Merch</a>
     </div>
 
     <a href="https://buymeacoffee.com/Toolwiki" target="_blank"
-       class="bg-yellow-500 text-black px-3 py-1 rounded-md font-semibold hover:bg-yellow-400">
+       class="bg-yellow-500 text-black px-3 py-1 rounded-md font-semibold hover:bg-yellow-400 text-sm md:text-base">
       ☕ Support Toolwiki
     </a>
   </nav>
 
-  
   <!-- Header -->
   <header class="text-center py-10">
     <img src="images/toolwiki-logo.png" alt="Toolwiki Logo"
-         class="mx-auto w-[1100px] md:w-[1100px] h-auto mb-4 pulse-glow">
+         class="mx-auto w-full max-w-[320px] sm:max-w-[480px] md:max-w-[800px] h-auto mb-4 pulse-glow">
     <h1 class="text-3xl font-bold">Quick, Free Utilities for Daily Life</h1>
     <p class="text-slate-400 mt-1"></p>
   </header>
 
-
-  
   <!-- Ad Slot -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
-     crossorigin="anonymous"></script>
-<!-- tools_ad_1 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5057632351845136"
-     data-ad-slot="5880708137"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  
+  <section class="max-w-3xl mx-auto mb-8 px-4">
+    <div class="w-full max-w-md sm:max-w-lg mx-auto aspect-[500/207] overflow-hidden">
+      <iframe
+        src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid0cuh7NSh6u1mGcqpArsaze6wUqVpMU8MGaiHs1JDRZcC6RC1Bu51qLWufdEfKSmuQl%26id%3D61593288390601&show_text=true&width=500"
+        class="w-full h-full border-none"
+        style="border:none;overflow:hidden"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="encrypted-media">
+      </iframe>
+    </div>
+  </section>
 
   <!-- Search -->
   <div class="max-w-xl mx-auto mb-6 px-4">
     <input id="tool-search" type="text"
            placeholder="Search tools..."
-           class="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700
+           class="w-full px-3 md:px-4 py-2 rounded-lg bg-slate-800 border border-slate-700
                   focus:ring-2 focus:ring-indigo-500 focus:outline-none">
   </div>
 
   <!-- Tool Launcher Grid -->
   <section class="max-w-6xl mx-auto px-4">
     <div id="tool-grid"
-         class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
     </div>
   </section>
 
   <!-- Active Tool Panel -->
   <section id="active-tool-wrapper"
-           class="max-w-4xl mx-auto mt-10 px-4 py-6 bg-slate-800 border border-slate-700 rounded-xl hidden">
+           class="max-w-4xl mx-auto mt-8 md:mt-10 px-4 py-5 md:py-6 bg-slate-800 border border-slate-700 rounded-xl hidden">
     <div class="flex justify-between items-center mb-4">
       <div>
         <h2 id="active-tool-title" class="text-xl font-bold"></h2>
@@ -123,1643 +175,1783 @@
   </section>
 
   <!-- TOOL UIs -->
-  <main>
-<section id="meme-generator" class="tool-ui">
-  <h2 class="text-xl font-bold mb-4">Meme Generator</h2>
+  <main class="max-w-5xl mx-auto px-4 pb-10">
 
-  <div class="grid md:grid-cols-2 gap-4">
-    <div>
-      <label class="block mb-2">
-        Upload Image:
-        <input type="file" id="meme-image" accept="image/*">
-      </label>
+    <!-- Meme Generator -->
+    <section id="meme-generator" class="tool-ui tool-card">
+      <h2>Meme Generator</h2>
 
-      <label class="block mb-2">
-        Top Text:
-        <input type="text" id="meme-top" placeholder="Top text">
-      </label>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-2 text-sm">
+            Upload Image:
+            <input type="file" id="meme-image" accept="image/*">
+          </label>
 
-      <label class="block mb-2">
-        Bottom Text:
-        <input type="text" id="meme-bottom" placeholder="Bottom text">
-      </label>
+          <label class="block mb-2 text-sm">
+            Top Text:
+            <input type="text" id="meme-top" placeholder="Top text">
+          </label>
 
-      <label class="block mb-2">
-        Font:
-        <select id="meme-font">
-          <option value="Impact">Impact</option>
-          <option value="Arial Black">Arial Black</option>
-          <option value="Comic Sans MS">Comic Sans</option>
-          <option value="Helvetica">Helvetica</option>
-        </select>
-      </label>
+          <label class="block mb-2 text-sm">
+            Bottom Text:
+            <input type="text" id="meme-bottom" placeholder="Bottom text">
+          </label>
 
-      <label class="block mb-2">
-        Text Size:
-        <input type="range" id="meme-size" min="20" max="120" value="48">
-      </label>
+          <label class="block mb-2 text-sm">
+            Font:
+            <select id="meme-font">
+              <option value="Impact">Impact</option>
+              <option value="Arial Black">Arial Black</option>
+              <option value="Comic Sans MS">Comic Sans</option>
+              <option value="Helvetica">Helvetica</option>
+            </select>
+          </label>
 
-      <label class="block mb-2">
-        Text Color:
-        <input type="color" id="meme-color" value="#ffffff">
-      </label>
+          <label class="block mb-2 text-sm">
+            Text Size:
+            <input type="range" id="meme-size" min="20" max="120" value="48">
+          </label>
 
-      <label class="block mb-2">
-        Outline Color:
-        <input type="color" id="meme-outline" value="#000000">
-      </label>
+          <label class="block mb-2 text-sm">
+            Text Color:
+            <input type="color" id="meme-color" value="#ffffff">
+          </label>
 
-      <label class="block mb-2">
-        Add Emoji / Sticker:
-        <select id="meme-sticker">
-          <option value="">None</option>
-          <option value="😂">😂</option>
-          <option value="🔥">🔥</option>
-          <option value="💀">💀</option>
-          <option value="🤡">🤡</option>
-          <option value="😎">😎</option>
-        </select>
-      </label>
+          <label class="block mb-2 text-sm">
+            Outline Color:
+            <input type="color" id="meme-outline" value="#000000">
+          </label>
 
-      <label class="block mb-2">
-        Caption Idea (optional):
-        <input type="text" id="meme-idea" placeholder="e.g. When Monday hits...">
-      </label>
+          <label class="block mb-2 text-sm">
+            Add Emoji / Sticker:
+            <select id="meme-sticker">
+              <option value="">None</option>
+              <option value="😂">😂</option>
+              <option value="🔥">🔥</option>
+              <option value="💀">💀</option>
+              <option value="🤡">🤡</option>
+              <option value="😎">😎</option>
+            </select>
+          </label>
 
-      <button id="meme-generate"
-              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md mt-2">
-        Generate Meme
-      </button>
+          <label class="block mb-2 text-sm">
+            Caption Idea (optional):
+            <input type="text" id="meme-idea" placeholder="e.g. When Monday hits...">
+          </label>
 
-      <p class="text-xs text-slate-400 mt-2">
-        Tip: Drag text on the preview to reposition it.
-      </p>
-    </div>
+          <button id="meme-generate"
+                  class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md mt-2 w-full sm:w-auto">
+            Generate Meme
+          </button>
 
-    <div class="flex flex-col items-center">
-      <canvas id="meme-canvas" class="mt-2 w-full max-w-md border border-slate-700"></canvas>
+          <p class="text-xs text-slate-400 mt-2">
+            Tip: Drag text on the preview to reposition it.
+          </p>
+        </div>
 
-      <a id="meme-download"
-              class="hidden mt-4 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md">
-        Download Meme
-    </a>
-    </div>
-  </div>
-</section>
+        <div class="flex flex-col items-center">
+          <canvas id="meme-canvas" class="mt-2 w-full max-w-md border border-slate-700"></canvas>
 
-<!-- Unit Price Calculator -->
-<section id="unit-price-calculator" class="tool-ui">
-  <h2 class="text-xl font-bold mb-4">Unit Price Calculator</h2>
+          <a id="meme-download"
+             class="hidden mt-4 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+            Download Meme
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <div class="grid md:grid-cols-2 gap-6">
-    <!-- Item A -->
-    <div class="border border-slate-700 rounded-lg p-4">
-      <h3 class="font-semibold mb-2">Item A</h3>
+    <!-- Unit Price Calculator -->
+    <section id="unit-price-calculator" class="tool-ui tool-card">
+      <h2>Unit Price Calculator</h2>
 
-      <label class="block mb-2 text-sm">
-        Store / Label
-        <input type="text" id="up-a-label" placeholder="e.g. Walmart 12-pack">
-      </label>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Item A -->
+        <div class="border border-slate-700 rounded-lg p-4">
+          <h3 class="font-semibold mb-2">Item A</h3>
 
-      <label class="block mb-2 text-sm">
-        Price
-        <input type="number" id="up-a-price" step="0.01" placeholder="e.g. 9.99">
-      </label>
+          <label class="block mb-2 text-sm">
+            Store / Label
+            <input type="text" id="up-a-label" placeholder="e.g. Walmart 12-pack">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Quantity
-        <input type="number" id="up-a-qty" step="0.01" placeholder="e.g. 12">
-      </label>
+          <label class="block mb-2 text-sm">
+            Price
+            <input type="number" id="up-a-price" step="0.01" placeholder="e.g. 9.99">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Unit
-        <select id="up-a-unit">
-          <option value="each">each</option>
-          <option value="oz">oz</option>
-          <option value="lb">lb</option>
-          <option value="g">g</option>
-          <option value="kg">kg</option>
-          <option value="ml">ml</option>
-          <option value="l">L</option>
-        </select>
-      </label>
+          <label class="block mb-2 text-sm">
+            Quantity
+            <input type="number" id="up-a-qty" step="0.01" placeholder="e.g. 12">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Discount (optional)
-        <input type="number" id="up-a-discount" step="0.01" placeholder="e.g. 1.50">
-      </label>
+          <label class="block mb-2 text-sm">
+            Unit
+            <select id="up-a-unit">
+              <option value="each">each</option>
+              <option value="oz">oz</option>
+              <option value="lb">lb</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+              <option value="ml">ml</option>
+              <option value="l">L</option>
+            </select>
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Tax % (optional)
-        <input type="number" id="up-a-tax" step="0.01" placeholder="e.g. 8.25">
-      </label>
+          <label class="block mb-2 text-sm">
+            Discount (optional)
+            <input type="number" id="up-a-discount" step="0.01" placeholder="e.g. 1.50">
+          </label>
 
-      <p class="mt-3 text-sm text-slate-400">
-        Effective price and unit cost will include discount and tax if provided.
-      </p>
-    </div>
+          <label class="block mb-2 text-sm">
+            Tax % (optional)
+            <input type="number" id="up-a-tax" step="0.01" placeholder="e.g. 8.25">
+          </label>
 
-    <!-- Item B -->
-    <div class="border border-slate-700 rounded-lg p-4">
-      <h3 class="font-semibold mb-2">Item B (optional)</h3>
+          <p class="mt-3 text-sm text-slate-400">
+            Effective price and unit cost will include discount and tax if provided.
+          </p>
+        </div>
 
-      <label class="block mb-2 text-sm">
-        Store / Label
-        <input type="text" id="up-b-label" placeholder="e.g. Costco bulk pack">
-      </label>
+        <!-- Item B -->
+        <div class="border border-slate-700 rounded-lg p-4">
+          <h3 class="font-semibold mb-2">Item B (optional)</h3>
 
-      <label class="block mb-2 text-sm">
-        Price
-        <input type="number" id="up-b-price" step="0.01" placeholder="e.g. 19.99">
-      </label>
+          <label class="block mb-2 text-sm">
+            Store / Label
+            <input type="text" id="up-b-label" placeholder="e.g. Costco bulk pack">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Quantity
-        <input type="number" id="up-b-qty" step="0.01" placeholder="e.g. 36">
-      </label>
+          <label class="block mb-2 text-sm">
+            Price
+            <input type="number" id="up-b-price" step="0.01" placeholder="e.g. 19.99">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Unit
-        <select id="up-b-unit">
-          <option value="each">each</option>
-          <option value="oz">oz</option>
-          <option value="lb">lb</option>
-          <option value="g">g</option>
-          <option value="kg">kg</option>
-          <option value="ml">ml</option>
-          <option value="l">L</option>
-        </select>
-      </label>
+          <label class="block mb-2 text-sm">
+            Quantity
+            <input type="number" id="up-b-qty" step="0.01" placeholder="e.g. 36">
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Discount (optional)
-        <input type="number" id="up-b-discount" step="0.01" placeholder="e.g. 2.00">
-      </label>
+          <label class="block mb-2 text-sm">
+            Unit
+            <select id="up-b-unit">
+              <option value="each">each</option>
+              <option value="oz">oz</option>
+              <option value="lb">lb</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+              <option value="ml">ml</option>
+              <option value="l">L</option>
+            </select>
+          </label>
 
-      <label class="block mb-2 text-sm">
-        Tax % (optional)
-        <input type="number" id="up-b-tax" step="0.01" placeholder="e.g. 8.25">
-      </label>
+          <label class="block mb-2 text-sm">
+            Discount (optional)
+            <input type="number" id="up-b-discount" step="0.01" placeholder="e.g. 2.00">
+          </label>
 
-      <p class="mt-3 text-sm text-slate-400">
-        Leave Item B empty to calculate only Item A.
-      </p>
-    </div>
-  </div>
+          <label class="block mb-2 text-sm">
+            Tax % (optional)
+            <input type="number" id="up-b-tax" step="0.01" placeholder="e.g. 8.25">
+          </label>
 
-  <div class="mt-4 flex flex-wrap gap-3 items-center">
-    <button id="up-calc"
-            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md">
-      Calculate
-    </button>
+          <p class="mt-3 text-sm text-slate-400">
+            Leave Item B empty to calculate only Item A.
+          </p>
+        </div>
+      </div>
 
-    <button id="up-clear"
-            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md text-sm">
-      Clear
-    </button>
-  </div>
+      <div class="mt-4 flex flex-wrap gap-3 items-center">
+        <button id="up-calc"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Calculate
+        </button>
 
-  <div class="mt-6 border border-slate-700 rounded-lg p-4">
-    <h3 class="font-semibold mb-2">Results</h3>
+        <button id="up-clear"
+                class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md text-sm w-full sm:w-auto">
+          Clear
+        </button>
+      </div>
 
-    <div id="up-a-result" class="text-sm mb-2 text-slate-200"></div>
-    <div id="up-b-result" class="text-sm mb-2 text-slate-200"></div>
-    <div id="up-compare" class="text-sm mt-3 text-slate-300 font-semibold"></div>
+      <div class="mt-6 border border-slate-700 rounded-lg p-4">
+        <h3 class="font-semibold mb-2">Results</h3>
 
-    <p class="mt-3 text-xs text-slate-500">
-      Units are normalized for comparison: g ↔ kg, ml ↔ L, oz ↔ lb.
-    </p>
-  </div>
-</section>
+        <div id="up-a-result" class="text-sm mb-2 text-slate-200"></div>
+        <div id="up-b-result" class="text-sm mb-2 text-slate-200"></div>
+        <div id="up-compare" class="text-sm mt-3 text-slate-300 font-semibold"></div>
 
+        <p class="mt-3 text-xs text-slate-500">
+          Units are normalized for comparison: g ↔ kg, ml ↔ L, oz ↔ lb.
+        </p>
+      </div>
+    </section>
 
+    <!-- Multi Ticker -->
+    <section id="multi-ticker" class="tool-ui tool-card">
+      <h2>Live Stock & Crypto Ticker</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Enter Symbols:
+          <input type="text" id="mt-symbols" placeholder="AAPL, TSLA, BTC">
+        </label>
+        <button id="mt-start"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Start Tracking
+        </button>
+        <p class="text-sm text-slate-300">Status: <span id="mt-status">Waiting…</span></p>
+        <div id="mt-results" class="text-sm text-slate-200 mt-2"></div>
+      </div>
+    </section>
 
+    <!-- Bitcoin Calculator -->
+    <section id="btc-calculator" class="tool-ui tool-card">
+      <h2>Bitcoin Rate Calculator</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Amount in USD:
+          <input type="number" id="btc-usd" placeholder="100">
+        </label>
+        <button id="btc-calc"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Convert
+        </button>
+        <p class="text-sm text-slate-300">BTC Price: <span id="btc-price">—</span></p>
+        <p class="text-sm text-slate-300">You Get: <span id="btc-result">—</span></p>
+      </div>
+    </section>
 
+    <!-- Password Generator -->
+    <section id="password-generator" class="tool-ui tool-card">
+      <h2>Password Generator</h2>
 
-<!-- Multi Ticker -->
-<section id="multi-ticker" class="tool-ui">
-  <h2>Live Stock & Crypto Ticker</h2>
-  <label>Enter Symbols:
-    <input type="text" id="mt-symbols" placeholder="AAPL, TSLA, BTC">
-  </label>
-  <button id="mt-start">Start Tracking</button>
-  <p>Status: <span id="mt-status">Waiting…</span></p>
-  <div id="mt-results"></div>
-</section>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label class="block text-sm">
+            Length:
+            <input type="number" id="pw-length" value="12">
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="pw-lower" checked> <span>Lowercase</span>
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="pw-upper" checked> <span>Uppercase</span>
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="pw-numbers" checked> <span>Numbers</span>
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="pw-symbols"> <span>Symbols</span>
+          </label>
+        </div>
 
-<!-- Bitcoin Calculator -->
-<section id="btc-calculator" class="tool-ui">
-  <h2>Bitcoin Rate Calculator</h2>
-  <label>Amount in USD:
-    <input type="number" id="btc-usd" placeholder="100">
-  </label>
-  <button id="btc-calc">Convert</button>
-  <p>BTC Price: <span id="btc-price">—</span></p>
-  <p>You Get: <span id="btc-result">—</span></p>
-</section>
+        <div class="space-y-3">
+          <input type="text" id="pw-output" readonly class="w-full">
+          <div class="flex flex-wrap gap-3">
+            <button id="pw-generate"
+                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+              Generate
+            </button>
+            <button id="pw-copy"
+                    class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md w-full sm:w-auto">
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- Password Generator -->
-<section id="password-generator" class="tool-ui">
-  <h2>Password Generator</h2>
-  <label>Length:
-    <input type="number" id="pw-length" value="12">
-  </label>
-  <label><input type="checkbox" id="pw-lower" checked> Lowercase</label>
-  <label><input type="checkbox" id="pw-upper" checked> Uppercase</label>
-  <label><input type="checkbox" id="pw-numbers" checked> Numbers</label>
-  <label><input type="checkbox" id="pw-symbols"> Symbols</label>
-  <input type="text" id="pw-output" readonly>
-  <button id="pw-generate">Generate</button>
-  <button id="pw-copy">Copy</button>
-</section>
+    <!-- Length Converter -->
+    <section id="length-converter" class="tool-ui tool-card">
+      <h2>Length Converter</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Value:
+          <input type="number" id="length-value">
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block text-sm">
+            From:
+            <select id="length-from">
+              <option value="m">Meters</option>
+              <option value="km">Kilometers</option>
+              <option value="ft">Feet</option>
+              <option value="mi">Miles</option>
+            </select>
+          </label>
+          <label class="block text-sm">
+            To:
+            <select id="length-to">
+              <option value="m">Meters</option>
+              <option value="km">Kilometers</option>
+              <option value="ft">Feet</option>
+              <option value="mi">Miles</option>
+            </select>
+          </label>
+        </div>
+        <button id="length-convert"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Convert
+        </button>
+        <input type="text" id="length-output" readonly class="w-full mt-2">
+      </div>
+    </section>
 
-<!-- Length Converter -->
-<section id="length-converter" class="tool-ui">
-  <h2>Length Converter</h2>
-  <input type="number" id="length-value">
-  <select id="length-from">
-    <option value="m">Meters</option>
-    <option value="km">Kilometers</option>
-    <option value="ft">Feet</option>
-    <option value="mi">Miles</option>
-  </select>
-  <select id="length-to">
-    <option value="m">Meters</option>
-    <option value="km">Kilometers</option>
-    <option value="ft">Feet</option>
-    <option value="mi">Miles</option>
-  </select>
-  <button id="length-convert">Convert</button>
-  <input type="text" id="length-output" readonly>
-</section>
+    <!-- Tip Calculator -->
+    <section id="tip-calculator" class="tool-ui tool-card">
+      <h2>Tip Calculator</h2>
+      <div class="space-y-3">
+        <input type="number" id="tip-bill" placeholder="Bill">
+        <input type="number" id="tip-percent" value="15">
+        <input type="number" id="tip-people" value="1">
+        <button id="tip-calc"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Calculate
+        </button>
+        <p class="text-sm text-slate-300">Total Tip: <span id="tip-total">0.00</span></p>
+        <p class="text-sm text-slate-300">Per Person: <span id="tip-per-person">0.00</span></p>
+      </div>
+    </section>
 
-<!-- Tip Calculator -->
-<section id="tip-calculator" class="tool-ui">
-  <h2>Tip Calculator</h2>
-  <input type="number" id="tip-bill" placeholder="Bill">
-  <input type="number" id="tip-percent" value="15">
-  <input type="number" id="tip-people" value="1">
-  <button id="tip-calc">Calculate</button>
-  <p>Total Tip: <span id="tip-total">0.00</span></p>
-  <p>Per Person: <span id="tip-per-person">0.00</span></p>
-</section>
+    <!-- QR Generator -->
+    <section id="qr-generator" class="tool-ui tool-card">
+      <h2>QR Code Generator</h2>
+      <div class="space-y-3">
+        <input type="text" id="qr-input" placeholder="Text or URL">
+        <button id="qr-generate"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Generate
+        </button>
+        <canvas id="qr-canvas" width="180" height="180" class="mt-2 border border-slate-700 mx-auto"></canvas>
+        <button id="qr-download"
+                class="mt-3 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+          Download
+        </button>
+      </div>
+    </section>
 
-<!-- QR Generator -->
-<section id="qr-generator" class="tool-ui">
-  <h2>QR Code Generator</h2>
-  <input type="text" id="qr-input">
-  <button id="qr-generate">Generate</button>
-  <canvas id="qr-canvas" width="180" height="180"></canvas>
-  <button id="qr-download">Download</button>
-</section>
+    <!-- Random Name/Number -->
+    <section id="random-tool" class="tool-ui tool-card">
+      <h2>Random Name / Number</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Type:
+          <select id="random-type">
+            <option value="number">Number</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+        <button id="random-generate"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Generate
+        </button>
+        <p id="random-output" class="text-sm text-slate-300 mt-2"></p>
+      </div>
+    </section>
 
-<!-- Random Name/Number -->
-<section id="random-tool" class="tool-ui">
-  <h2>Random Name / Number</h2>
-  <select id="random-type">
-    <option value="number">Number</option>
-    <option value="name">Name</option>
-  </select>
-  <button id="random-generate">Generate</button>
-  <p id="random-output"></p>
-</section>
+    <!-- JSON Formatter -->
+    <section id="json-formatter" class="tool-ui tool-card">
+      <h2>JSON Formatter</h2>
+      <div class="space-y-3">
+        <textarea id="json-input" rows="5" class="w-full"></textarea>
+        <button id="json-format"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Format
+        </button>
+        <textarea id="json-output" rows="5" readonly class="w-full"></textarea>
+      </div>
+    </section>
 
-<!-- JSON Formatter -->
-<section id="json-formatter" class="tool-ui">
-  <h2>JSON Formatter</h2>
-  <textarea id="json-input" rows="5"></textarea>
-  <button id="json-format">Format</button>
-  <textarea id="json-output" rows="5" readonly></textarea>
-</section>
+    <!-- Currency Converter -->
+    <section id="currency-converter" class="tool-ui tool-card">
+      <h2>Currency Converter</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Amount:
+          <input type="number" id="cc-amount">
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block text-sm">
+            From:
+            <select id="cc-from">
+              <option>USD</option><option>EUR</option><option>GBP</option>
+            </select>
+          </label>
+          <label class="block text-sm">
+            To:
+            <select id="cc-to">
+              <option>USD</option><option>EUR</option><option>GBP</option>
+            </select>
+          </label>
+        </div>
+        <button id="cc-convert"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Convert
+        </button>
+        <p id="cc-result" class="text-sm text-slate-300 mt-2"></p>
+      </div>
+    </section>
 
-<!-- Currency Converter -->
-<section id="currency-converter" class="tool-ui">
-  <h2>Currency Converter</h2>
-  <input type="number" id="cc-amount">
-  <select id="cc-from">
-    <option>USD</option><option>EUR</option><option>GBP</option>
-  </select>
-  <select id="cc-to">
-    <option>USD</option><option>EUR</option><option>GBP</option>
-  </select>
-  <button id="cc-convert">Convert</button>
-  <p id="cc-result"></p>
-</section>
+    <!-- Image Compressor -->
+    <section id="image-compressor" class="tool-ui tool-card">
+      <h2>Image Compressor</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Upload Image:
+          <input type="file" id="ic-file" accept="image/*">
+        </label>
+        <label class="block text-sm">
+          Quality (0.1 - 1.0):
+          <input type="number" id="ic-quality" step="0.1" min="0.1" max="1" value="0.7">
+        </label>
+        <button id="ic-compress"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Compress
+        </button>
+        <p class="text-sm text-slate-300">Original: <span id="ic-original"></span></p>
+        <p class="text-sm text-slate-300">Compressed: <span id="ic-compressed"></span></p>
+        <a id="ic-download" href="#" style="display:none;"
+           class="mt-3 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+          Download
+        </a>
+      </div>
+    </section>
 
-<!-- Image Compressor -->
-<section id="image-compressor" class="tool-ui">
-  <h2>Image Compressor</h2>
-  <input type="file" id="ic-file" accept="image/*">
-  <input type="number" id="ic-quality" step="0.1" min="0.1" max="1" value="0.7">
-  <button id="ic-compress">Compress</button>
-  <p>Original: <span id="ic-original"></span></p>
-  <p>Compressed: <span id="ic-compressed"></span></p>
-  <a id="ic-download" href="#" style="display:none;">Download</a>
-</section>
+    <!-- Time Zone Converter -->
+    <section id="timezone-tool" class="tool-ui tool-card">
+      <h2>Time Zone Converter</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Date & Time:
+          <input type="datetime-local" id="tz-input">
+        </label>
+        <div class="grid md:grid-cols-2 gap-3">
+          <label class="block text-sm">
+            From:
+            <select id="tz-from"></select>
+          </label>
+          <label class="block text-sm">
+            To:
+            <select id="tz-to"></select>
+          </label>
+        </div>
+        <button id="tz-convert"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Convert
+        </button>
+        <p id="tz-result" class="text-sm text-slate-300 mt-2"></p>
+      </div>
+    </section>
 
-<!-- Time Zone Converter -->
-<section id="timezone-tool" class="tool-ui">
-  <h2>Time Zone Converter</h2>
-  <input type="datetime-local" id="tz-input">
-  <select id="tz-from"></select>
-  <select id="tz-to"></select>
-  <button id="tz-convert">Convert</button>
-  <p id="tz-result"></p>
-</section>
+    <!-- Image Converter -->
+    <section id="image-converter" class="tool-ui tool-card">
+      <h2>Image Converter</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Upload Image:
+          <input type="file" id="icv-file" accept="image/*">
+        </label>
+        <label class="block text-sm">
+          Convert To:
+          <select id="icv-format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+          </select>
+        </label>
+        <button id="icv-convert"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Convert
+        </button>
+        <p class="text-sm text-slate-300">Original: <span id="icv-original-type"></span></p>
+        <p class="text-sm text-slate-300">Converted: <span id="icv-converted-type"></span></p>
+        <a id="icv-download" href="#" download="converted-image" style="display:none;"
+           class="mt-3 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+          Download
+        </a>
+      </div>
+    </section>
 
-<!-- Image Converter -->
-<section id="image-converter" class="tool-ui">
-  <h2>Image Converter</h2>
-  <input type="file" id="icv-file" accept="image/*">
-  <select id="icv-format">
-    <option value="image/jpeg">JPG</option>
-    <option value="image/png">PNG</option>
-    <option value="image/webp">WEBP</option>
-  </select>
-  <button id="icv-convert">Convert</button>
-  <p>Original: <span id="icv-original-type"></span></p>
-  <p>Converted: <span id="icv-converted-type"></span></p>
-  <a id="icv-download" href="#" download="converted-image" style="display:none;">Download</a>
-</section>
+    <!-- Base64 Tool -->
+    <section id="base64-tool" class="tool-ui tool-card">
+      <h2>Base64 Encoder / Decoder</h2>
+      <div class="space-y-3">
+        <textarea id="b64-input" rows="4" class="w-full"></textarea>
+        <div class="flex flex-wrap gap-3">
+          <button id="b64-encode"
+                  class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+            Encode
+          </button>
+          <button id="b64-decode"
+                  class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md w-full sm:w-auto">
+            Decode
+          </button>
+        </div>
+        <textarea id="b64-output" rows="4" readonly class="w-full"></textarea>
+      </div>
+    </section>
 
-<!-- Base64 Tool -->
-<section id="base64-tool" class="tool-ui">
-  <h2>Base64 Encoder / Decoder</h2>
-  <textarea id="b64-input" rows="4"></textarea>
-  <button id="b64-encode">Encode</button>
-  <button id="b64-decode">Decode</button>
-  <textarea id="b64-output" rows="4" readonly></textarea>
-</section>
+    <!-- Compound Interest -->
+    <section id="compound-interest-tool" class="tool-ui tool-card">
+      <h2>Compound Interest Calculator</h2>
+      <div class="space-y-3">
+        <input type="number" id="ci-principal" placeholder="1000">
+        <input type="number" id="ci-rate" placeholder="5">
+        <input type="number" id="ci-years" placeholder="10">
+        <input type="number" id="ci-frequency" placeholder="12">
+        <button id="ci-calculate"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Calculate
+        </button>
+        <p class="text-sm text-slate-300">Final: <span id="ci-final"></span></p>
+        <p class="text-sm text-slate-300">Interest: <span id="ci-interest"></span></p>
+      </div>
+    </section>
 
-<!-- Compound Interest -->
-<section id="compound-interest-tool" class="tool-ui">
-  <h2>Compound Interest Calculator</h2>
-  <input type="number" id="ci-principal" placeholder="1000">
-  <input type="number" id="ci-rate" placeholder="5">
-  <input type="number" id="ci-years" placeholder="10">
-  <input type="number" id="ci-frequency" placeholder="12">
-  <button id="ci-calculate">Calculate</button>
-  <p>Final: <span id="ci-final"></span></p>
-  <p>Interest: <span id="ci-interest"></span></p>
-</section>
+    <!-- Calorie Counter -->
+    <section id="calorie-counter" class="tool-ui tool-card">
+      <h2>Calorie Counter</h2>
+      <div class="space-y-3">
+        <input type="text" id="cal-food" placeholder="Food">
+        <input type="number" id="cal-amount" placeholder="Calories">
+        <button id="cal-add"
+                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Add
+        </button>
+        <ul id="cal-list" class="text-sm text-slate-300 space-y-1 mt-2"></ul>
+        <p class="text-sm text-slate-300">Total: <span id="cal-total">0</span></p>
+        <button id="cal-clear"
+                class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md w-full sm:w-auto mt-2">
+          Clear
+        </button>
+      </div>
+    </section>
 
-<!-- Calorie Counter -->
-<section id="calorie-counter" class="tool-ui">
-  <h2>Calorie Counter</h2>
-  <input type="text" id="cal-food" placeholder="Food">
-  <input type="number" id="cal-amount" placeholder="Calories">
-  <button id="cal-add">Add</button>
-  <ul id="cal-list"></ul>
-  <p>Total: <span id="cal-total">0</span></p>
-  <button id="cal-clear">Clear</button>
-</section>
+    <!-- Regex Tester -->
+    <section id="regex-tester" class="tool-ui tool-card">
+      <h2>Regex Tester</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Test String:
+          <textarea id="rt-text" rows="4"
+            class="w-full bg-slate-800 border border-slate-700 rounded-md p-2"></textarea>
+        </label>
 
-<!-- Regex Tester -->
-<section id="regex-tester" class="tool-ui">
-  <h2>Regex Tester</h2>
-  <textarea id="rt-text"></textarea>
-  <input type="text" id="rt-regex">
-  <input type="text" id="rt-flags">
-  <button id="rt-test">Test</button>
-  <ul id="rt-matches"></ul>
-  <p>Status: <span id="rt-status"></span></p>
-</section>
+        <label class="block text-sm">
+          Regular Expression:
+          <input type="text" id="rt-regex"
+            class="w-full bg-slate-800 border border-slate-700 rounded-md p-2">
+        </label>
 
-<!-- PDF Manager -->
-<section id="pdf-manager" class="tool-ui">
-  <h2>PDF Manager</h2>
-  <input type="file" id="pdf-files" multiple accept="application/pdf">
-  <button id="pdf-merge">Merge</button>
-  <button id="pdf-split">Split</button>
-  <button id="pdf-text">Extract Text</button>
-  <p>Status: <span id="pdf-status"></span></p>
-  <a id="pdf-download" href="#" download="output.pdf" style="display:none;">Download</a>
-  <textarea id="pdf-output" style="display:none;"></textarea>
-</section>
+        <label class="block text-sm">
+          Flags:
+          <input type="text" id="rt-flags"
+            class="w-full bg-slate-800 border border-slate-700 rounded-md p-2"
+            placeholder="g, i, m">
+        </label>
 
-<!-- Background Remover -->
-<section id="bg-remover" class="tool-ui">
-  <h2>Background Remover</h2>
-  <input type="file" id="bg-file" accept="image/*">
-  <button id="bg-remove">Remove</button>
-  <p>Status: <span id="bg-status"></span></p>
-  <canvas id="bg-canvas" style="display:none;"></canvas>
-  <a id="bg-download" href="#" download="no-background.png" style="display:none;">Download</a>
-</section>
+        <button id="rt-test"
+          class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md">
+          Test
+        </button>
+
+        <ul id="rt-matches" class="text-sm text-slate-300 space-y-1 mt-2"></ul>
+
+        <p class="text-xs text-slate-400">
+          Status: <span id="rt-status"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- PDF Manager -->
+    <section id="pdf-manager" class="tool-ui tool-card">
+      <h2>PDF Manager</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Select PDF Files:
+          <input type="file" id="pdf-files" multiple accept="application/pdf">
+        </label>
+
+        <div class="flex flex-wrap gap-3">
+          <button id="pdf-merge"
+            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+            Merge
+          </button>
+
+          <button id="pdf-split"
+            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-md w-full sm:w-auto">
+            Split
+          </button>
+
+          <button id="pdf-text"
+            class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+            Extract Text
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-400">
+          Status: <span id="pdf-status"></span>
+        </p>
+
+        <a id="pdf-download" href="#" download="output.pdf"
+           class="hidden mt-3 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md w-full sm:w-auto">
+          Download PDF
+        </a>
+
+        <textarea id="pdf-output" rows="6"
+          class="hidden w-full bg-slate-800 border border-slate-700 rounded-md p-2"></textarea>
+      </div>
+    </section>
+
+    <!-- Background Remover -->
+    <section id="bg-remover" class="tool-ui tool-card">
+      <h2>Background Remover</h2>
+      <div class="space-y-3">
+        <label class="block text-sm">
+          Upload Image:
+          <input type="file" id="bg-file" accept="image/*">
+        </label>
+
+        <button id="bg-remove"
+          class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md">
+          Remove Background
+        </button>
+
+        <p class="text-xs text-slate-400">
+          Status: <span id="bg-status"></span>
+        </p>
+
+        <canvas id="bg-canvas"
+          class="hidden w-full max-w-md border border-slate-700 rounded-md mx-auto"></canvas>
+
+        <a id="bg-download" href="#" download="no-background.png"
+           class="hidden mt-3 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-md w-full sm:w-auto">
+          Download Result
+        </a>
+      </div>
+    </section>
+
   </main>
 
+  <!-- Launcher Logic -->
+  <script>
+    const tools = [
+      { id: "unit-price-calculator", name: "Unit Price Calculator", icon: "🛒", desc: "Compare cost per unit" },
+      { id: "meme-generator", name: "Meme Generator", icon: "😂", desc: "Create custom memes" },
+      { id: "multi-ticker", name: "Live Ticker", icon: "📊", desc: "Track stocks & crypto" },
+      { id: "btc-calculator", name: "Bitcoin Calculator", icon: "₿", desc: "Convert USD to BTC" },
+      { id: "password-generator", name: "Password Generator", icon: "🔐", desc: "Generate secure passwords" },
+      { id: "length-converter", name: "Length Converter", icon: "📏", desc: "Convert length units" },
+      { id: "tip-calculator", name: "Tip Calculator", icon: "🧮", desc: "Calculate tips easily" },
+      { id: "qr-generator", name: "QR Generator", icon: "🔳", desc: "Create QR codes" },
+      { id: "random-tool", name: "Randomizer", icon: "🔢", desc: "Random names & numbers" },
+      { id: "json-formatter", name: "JSON Formatter", icon: "{}", desc: "Format JSON data" },
+      { id: "currency-converter", name: "Currency Converter", icon: "💱", desc: "Convert currencies" },
+      { id: "image-compressor", name: "Image Compressor", icon: "🗜️", desc: "Compress images" },
+      { id: "timezone-tool", name: "Time Zone Converter", icon: "🌎", desc: "Convert time zones" },
+      { id: "image-converter", name: "Image Converter", icon: "🖼️", desc: "Convert image formats" },
+      { id: "base64-tool", name: "Base64 Tool", icon: "🔡", desc: "Encode & decode Base64" },
+      { id: "compound-interest-tool", name: "Compound Interest", icon: "📈", desc: "Calculate interest" },
+      { id: "calorie-counter", name: "Calorie Counter", icon: "🍗", desc: "Track calories" },
+      { id: "regex-tester", name: "Regex Tester", icon: "🔍", desc: "Test regex patterns" },
+      { id: "pdf-manager", name: "PDF Manager", icon: "📄", desc: "Merge, split, extract" },
+      { id: "bg-remover", name: "Background Remover", icon: "🧠", desc: "Remove image backgrounds" }
+    ];
 
+    function renderToolGrid(list = tools) {
+      const grid = document.getElementById("tool-grid");
 
-<!-- Launcher Logic -->
-<script>
-  const tools = [
-    { id: "unit-price-calculator", name: "Unit Price Calculator", icon: "🛒", desc: "Compare cost per unit" },
-    { id: "meme-generator", name: "Meme Generator", icon: "😂", desc: "Create custom memes" },
-    { id: "multi-ticker", name: "Live Ticker", icon: "📊", desc: "Track stocks & crypto" },
-    { id: "btc-calculator", name: "Bitcoin Calculator", icon: "₿", desc: "Convert USD to BTC" },
-    { id: "password-generator", name: "Password Generator", icon: "🔐", desc: "Generate secure passwords" },
-    { id: "length-converter", name: "Length Converter", icon: "📏", desc: "Convert length units" },
-    { id: "tip-calculator", name: "Tip Calculator", icon: "🧮", desc: "Calculate tips easily" },
-    { id: "qr-generator", name: "QR Generator", icon: "🔳", desc: "Create QR codes" },
-    { id: "random-tool", name: "Randomizer", icon: "🔢", desc: "Random names & numbers" },
-    { id: "json-formatter", name: "JSON Formatter", icon: "{}", desc: "Format JSON data" },
-    { id: "currency-converter", name: "Currency Converter", icon: "💱", desc: "Convert currencies" },
-    { id: "image-compressor", name: "Image Compressor", icon: "🗜️", desc: "Compress images" },
-    { id: "timezone-tool", name: "Time Zone Converter", icon: "🌎", desc: "Convert time zones" },
-    { id: "image-converter", name: "Image Converter", icon: "🖼️", desc: "Convert image formats" },
-    { id: "base64-tool", name: "Base64 Tool", icon: "🔡", desc: "Encode & decode Base64" },
-    { id: "compound-interest-tool", name: "Compound Interest", icon: "📈", desc: "Calculate interest" },
-    { id: "calorie-counter", name: "Calorie Counter", icon: "🍗", desc: "Track calories" },
-    { id: "regex-tester", name: "Regex Tester", icon: "🔍", desc: "Test regex patterns" },
-    { id: "pdf-manager", name: "PDF Manager", icon: "📄", desc: "Merge, split, extract" },
-    { id: "bg-remover", name: "Background Remover", icon: "🧠", desc: "Remove image backgrounds" }
-  ];
-
-  function renderToolGrid(list = tools) {
-    const grid = document.getElementById("tool-grid");
-
-    grid.innerHTML = list.map(tool => `
-      <button
-        onclick="openTool('${tool.id}')"
-        class="p-4 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 transition flex flex-col items-center text-center"
-      >
-        <div class="text-4xl mb-2">${tool.icon}</div>
-        <p class="font-semibold">${tool.name}</p>
-        <p class="text-xs text-slate-400">${tool.desc}</p>
-      </button>
-    `).join("");
-  }
-
-  document.getElementById("tool-search").addEventListener("input", e => {
-    const term = e.target.value.toLowerCase();
-    const filtered = tools.filter(t =>
-      t.name.toLowerCase().includes(term) ||
-      t.desc.toLowerCase().includes(term)
-    );
-    renderToolGrid(filtered);
-  });
-
-  function openTool(id) {
-    const wrapper = document.getElementById("active-tool-wrapper");
-    const title = document.getElementById("active-tool-title");
-    const subtitle = document.getElementById("active-tool-subtitle");
-    const content = document.getElementById("active-tool-content");
-
-    const tool = tools.find(t => t.id === id);
-    const ui = document.getElementById(id);
-
-    document.querySelectorAll(".tool-ui").forEach(el => el.style.display = "none");
-
-    wrapper.classList.remove("hidden");
-
-    title.textContent = tool.name;
-    subtitle.textContent = tool.desc;
-
-    content.innerHTML = "";
-    ui.style.display = "block";
-    content.appendChild(ui);
-
-    wrapper.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function closeActiveTool() {
-  const wrapper = document.getElementById("active-tool-wrapper");
-  const content = document.getElementById("active-tool-content");
-
-  wrapper.classList.add("hidden");
-
-  // Move tool UIs back to <main>
-  const main = document.querySelector("main");
-
-  document.querySelectorAll(".tool-ui").forEach(ui => {
-    if (!main.contains(ui)) {
-      ui.style.display = "none";
-      main.appendChild(ui);
-    }
-  });
-
-  // Clear active panel
-  content.innerHTML = "";
-}
-
-
-  renderToolGrid();
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-<!-- QR Generator Script -->
-<script>
-(() => {
-  const input = document.getElementById("qr-input");
-  const generateBtn = document.getElementById("qr-generate");
-  const canvas = document.getElementById("qr-canvas");
-  const downloadBtn = document.getElementById("qr-download");
-
-  generateBtn.addEventListener("click", () => {
-    const text = input.value.trim();
-    if (!text) {
-      alert("Please enter text or a URL.");
-      return;
+      grid.innerHTML = list.map(tool => `
+        <button
+          onclick="openTool('${tool.id}')"
+          class="p-4 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 transition flex flex-col items-center text-center"
+        >
+          <div class="text-4xl mb-2">${tool.icon}</div>
+          <p class="font-semibold">${tool.name}</p>
+          <p class="text-xs text-slate-400">${tool.desc}</p>
+        </button>
+      `).join("");
     }
 
-    // Use the modern QRCode library
-    QRCode.toCanvas(canvas, text, { width: 180 }, (error) => {
-      if (error) {
-        console.error(error);
-        alert("QR generation failed.");
-        return;
-      }
-
-      // Enable download button
-      downloadBtn.onclick = () => {
-        const url = canvas.toDataURL("image/png");
-        downloadBtn.href = url;
-        downloadBtn.download = "qr-code.png";
-      };
-    });
-  });
-})();
-</script>
-
-
-
-<!-- Password Generator Script -->
-<script>
-(() => {
-  const lengthEl = document.getElementById("pw-length");
-  const lowerEl = document.getElementById("pw-lower");
-  const upperEl = document.getElementById("pw-upper");
-  const numberEl = document.getElementById("pw-numbers");
-  const symbolEl = document.getElementById("pw-symbols");
-  const outputEl = document.getElementById("pw-output");
-  const generateBtn = document.getElementById("pw-generate");
-  const copyBtn = document.getElementById("pw-copy");
-
-  const LOWER = "abcdefghijklmnopqrstuvwxyz";
-  const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const NUMBERS = "0123456789";
-  const SYMBOLS = "!@#$%^&*()_+-=[]{}|;:,.<>/?";
-
-  function generatePassword() {
-    const length = parseInt(lengthEl.value, 10);
-    let chars = "";
-
-    if (lowerEl.checked) chars += LOWER;
-    if (upperEl.checked) chars += UPPER;
-    if (numberEl.checked) chars += NUMBERS;
-    if (symbolEl.checked) chars += SYMBOLS;
-
-    if (!chars.length) {
-      outputEl.value = "";
-      alert("Select at least one character type.");
-      return;
-    }
-
-    let password = "";
-    for (let i = 0; i < length; i++) {
-      const index = Math.floor(Math.random() * chars.length);
-      password += chars[index];
-    }
-
-    outputEl.value = password;
-  }
-
-  generateBtn.addEventListener("click", generatePassword);
-
-  copyBtn.addEventListener("click", () => {
-    if (!outputEl.value) return;
-    navigator.clipboard.writeText(outputEl.value);
-    alert("Password copied!");
-  });
-})();
-</script>
-
-<!-- JSON Formatter Script -->
-<script>
-(() => {
-  const input = document.getElementById("json-input");
-  const output = document.getElementById("json-output");
-  const formatBtn = document.getElementById("json-format");
-
-  formatBtn.addEventListener("click", () => {
-    const raw = input.value.trim();
-
-    if (!raw) {
-      output.value = "Input is empty.";
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(raw);
-      output.value = JSON.stringify(parsed, null, 2);
-    } catch (err) {
-      output.value = "Invalid JSON:\n" + err.message;
-    }
-  });
-})();
-</script>
-
-
-
-<!-- Randomizer Script -->
-<script>
-(() => {
-  const typeSelect = document.getElementById("random-type");
-  const output = document.getElementById("random-output");
-  const generateBtn = document.getElementById("random-generate");
-
-  // Default name list (you can expand this anytime)
-  const names = [
-    "Alex", "Jordan", "Taylor", "Chris", "Morgan",
-    "Sam", "Jamie", "Casey", "Riley", "Cameron"
-  ];
-
-  generateBtn.addEventListener("click", () => {
-    const type = typeSelect.value;
-
-    if (type === "number") {
-      // Random number between 1 and 1000
-      const num = Math.floor(Math.random() * 1000) + 1;
-      output.textContent = `Random Number: ${num}`;
-    }
-
-    if (type === "name") {
-      const name = names[Math.floor(Math.random() * names.length)];
-      output.textContent = `Random Name: ${name}`;
-    }
-  });
-})();
-</script>
-
-
-
-<!-- Currency Converter Script -->
-<script>
-(() => {
-  const amountEl = document.getElementById("cc-amount");
-  const fromEl = document.getElementById("cc-from");
-  const toEl = document.getElementById("cc-to");
-  const convertBtn = document.getElementById("cc-convert");
-  const resultEl = document.getElementById("cc-result");
-
-  convertBtn.addEventListener("click", async () => {
-    const amount = parseFloat(amountEl.value);
-    const from = fromEl.value;
-    const to = toEl.value;
-
-    if (!amount || amount <= 0) {
-      resultEl.textContent = "Enter a valid amount.";
-      return;
-    }
-
-    try {
-      const url = `https://api.exchangerate.host/latest?base=${from}&symbols=${to}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (!data || !data.rates || !data.rates[to]) {
-        resultEl.textContent = "Conversion failed.";
-        return;
-      }
-
-      const rate = data.rates[to];
-      const converted = amount * rate;
-
-      resultEl.textContent = `${converted.toFixed(2)} ${to}`;
-    } catch (err) {
-      console.error(err);
-      resultEl.textContent = "Error fetching live rates.";
-    }
-  });
-})();
-</script>
-
-
-
-<!-- Image Compressor Script -->
-<script>
-(() => {
-  const fileInput = document.getElementById("ic-file");
-  const qualityInput = document.getElementById("ic-quality");
-  const compressBtn = document.getElementById("ic-compress");
-  const originalEl = document.getElementById("ic-original");
-  const compressedEl = document.getElementById("ic-compressed");
-  const downloadBtn = document.getElementById("ic-download");
-
-  let selectedImage = null;
-
-  fileInput.addEventListener("change", () => {
-    selectedImage = fileInput.files[0];
-    if (selectedImage) {
-      originalEl.textContent = (selectedImage.size / 1024).toFixed(2) + " KB";
-    }
-  });
-
-  compressBtn.addEventListener("click", () => {
-    if (!selectedImage) {
-      alert("Please upload an image first.");
-      return;
-    }
-
-    const quality = parseFloat(qualityInput.value);
-    const reader = new FileReader();
-
-    reader.readAsDataURL(selectedImage);
-
-    reader.onload = event => {
-      const img = new Image();
-      img.src = event.target.result;
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        ctx.drawImage(img, 0, 0);
-
-        const compressedData = canvas.toDataURL("image/jpeg", quality);
-
-        // Convert base64 → Blob
-        const byteString = atob(compressedData.split(",")[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-
-        const compressedBlob = new Blob([uintArray], { type: "image/jpeg" });
-
-        compressedEl.textContent = (compressedBlob.size / 1024).toFixed(2) + " KB";
-
-        // Enable download
-        downloadBtn.href = URL.createObjectURL(compressedBlob);
-        downloadBtn.style.display = "inline-block";
-      };
-    };
-  });
-})();
-</script>
-
-
-
-<!-- Time Zone Converter Script -->
-<script>
-(() => {
-  const tzInput = document.getElementById("tz-input");
-  const tzFrom = document.getElementById("tz-from");
-  const tzTo = document.getElementById("tz-to");
-  const tzConvert = document.getElementById("tz-convert");
-  const tzResult = document.getElementById("tz-result");
-
-  // Load all available IANA time zones
-  const zones = Intl.supportedValuesOf("timeZone");
-  zones.forEach(zone => {
-    const opt1 = document.createElement("option");
-    opt1.value = zone;
-    opt1.textContent = zone;
-
-    const opt2 = document.createElement("option");
-    opt2.value = zone;
-    opt2.textContent = zone;
-
-    tzFrom.appendChild(opt1);
-    tzTo.appendChild(opt2);
-  });
-
-  // Default selections
-  tzFrom.value = "America/Chicago";
-  tzTo.value = "UTC";
-
-  tzConvert.addEventListener("click", () => {
-    const inputValue = tzInput.value;
-    if (!inputValue) {
-      tzResult.textContent = "Select a date and time first.";
-      return;
-    }
-
-    const fromZone = tzFrom.value;
-    const toZone = tzTo.value;
-
-    // Convert input to Date object (interpreted in local timezone)
-    const date = new Date(inputValue);
-
-    // Format in target timezone
-    const converted = new Intl.DateTimeFormat("en-US", {
-      timeZone: toZone,
-      dateStyle: "medium",
-      timeStyle: "short"
-    }).format(date);
-
-    tzResult.textContent = `${converted} (${toZone})`;
-  });
-})();
-</script>
-
-
-<!-- Image Converter Script -->
-<script>
-(() => {
-  const fileInput = document.getElementById("icv-file");
-  const formatSelect = document.getElementById("icv-format");
-  const convertBtn = document.getElementById("icv-convert");
-  const originalTypeEl = document.getElementById("icv-original-type");
-  const convertedTypeEl = document.getElementById("icv-converted-type");
-  const downloadBtn = document.getElementById("icv-download");
-
-  let selectedImage = null;
-
-  fileInput.addEventListener("change", () => {
-    selectedImage = fileInput.files[0];
-    if (selectedImage) {
-      originalTypeEl.textContent = selectedImage.type || "Unknown";
-    }
-  });
-
-  convertBtn.addEventListener("click", () => {
-    if (!selectedImage) {
-      alert("Please upload an image first.");
-      return;
-    }
-
-    const targetType = formatSelect.value;
-    const reader = new FileReader();
-
-    reader.readAsDataURL(selectedImage);
-
-    reader.onload = event => {
-      const img = new Image();
-      img.src = event.target.result;
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        ctx.drawImage(img, 0, 0);
-
-        const convertedData = canvas.toDataURL(targetType);
-
-        // Base64 → Blob
-        const byteString = atob(convertedData.split(",")[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-
-        const convertedBlob = new Blob([uintArray], { type: targetType });
-
-        convertedTypeEl.textContent = targetType;
-
-        // Set download name based on type
-        let ext = "jpg";
-        if (targetType === "image/png") ext = "png";
-        if (targetType === "image/webp") ext = "webp";
-
-        downloadBtn.href = URL.createObjectURL(convertedBlob);
-        downloadBtn.download = "converted-image." + ext;
-        downloadBtn.style.display = "inline-block";
-      };
-    };
-  });
-})();
-</script>
-
-
-
-<!-- Base64 Tool Script -->
-<script>
-(() => {
-  const input = document.getElementById("b64-input");
-  const output = document.getElementById("b64-output");
-  const encodeBtn = document.getElementById("b64-encode");
-  const decodeBtn = document.getElementById("b64-decode");
-
-  // UTF‑8 safe Base64 encode
-  function encodeUTF8(str) {
-    return btoa(unescape(encodeURIComponent(str)));
-  }
-
-  // UTF‑8 safe Base64 decode
-  function decodeUTF8(str) {
-    return decodeURIComponent(escape(atob(str)));
-  }
-
-  encodeBtn.addEventListener("click", () => {
-    try {
-      const text = input.value;
-      output.value = encodeUTF8(text);
-    } catch (err) {
-      output.value = "Error encoding text.";
-    }
-  });
-
-  decodeBtn.addEventListener("click", () => {
-    try {
-      const text = input.value;
-      output.value = decodeUTF8(text);
-    } catch (err) {
-      output.value = "Error decoding Base64.";
-    }
-  });
-})();
-</script>
-
-
-
-<!-- Compound Interest Script -->
-<script>
-(() => {
-  const principalEl = document.getElementById("ci-principal");
-  const rateEl = document.getElementById("ci-rate");
-  const yearsEl = document.getElementById("ci-years");
-  const freqEl = document.getElementById("ci-frequency");
-  const calcBtn = document.getElementById("ci-calculate");
-  const finalEl = document.getElementById("ci-final");
-  const interestEl = document.getElementById("ci-interest");
-
-  calcBtn.addEventListener("click", () => {
-    const P = parseFloat(principalEl.value);
-    const r = parseFloat(rateEl.value) / 100;
-    const t = parseFloat(yearsEl.value);
-    const n = parseFloat(freqEl.value);
-
-    if (!P || !r || !t || !n || P <= 0 || n <= 0) {
-      finalEl.textContent = "Invalid input.";
-      interestEl.textContent = "";
-      return;
-    }
-
-    const A = P * Math.pow(1 + r / n, n * t);
-    const interest = A - P;
-
-    finalEl.textContent = "$" + A.toFixed(2);
-    interestEl.textContent = "$" + interest.toFixed(2);
-  });
-})();
-</script>
-
-
-
-
-<!-- Calorie Counter Script -->
-<script>
-(() => {
-  const foodInput = document.getElementById("cal-food");
-  const calInput = document.getElementById("cal-amount");
-  const addBtn = document.getElementById("cal-add");
-  const listEl = document.getElementById("cal-list");
-  const totalEl = document.getElementById("cal-total");
-  const clearBtn = document.getElementById("cal-clear");
-
-  let total = 0;
-
-  addBtn.addEventListener("click", () => {
-    const food = foodInput.value.trim();
-    const calories = parseFloat(calInput.value);
-
-    if (!food || isNaN(calories) || calories <= 0) {
-      alert("Enter valid food and calorie amount.");
-      return;
-    }
-
-    // Add item to list
-    const li = document.createElement("li");
-    li.textContent = `${food}: ${calories} kcal`;
-    listEl.appendChild(li);
-
-    // Update total
-    total += calories;
-    totalEl.textContent = total;
-
-    // Clear inputs
-    foodInput.value = "";
-    calInput.value = "";
-  });
-
-  clearBtn.addEventListener("click", () => {
-    total = 0;
-    totalEl.textContent = 0;
-    listEl.innerHTML = "";
-  });
-})();
-</script>
-
-
-
-<!-- Regex Tester Script -->
-<script>
-(() => {
-  const textEl = document.getElementById("rt-text");
-  const regexEl = document.getElementById("rt-regex");
-  const flagsEl = document.getElementById("rt-flags");
-  const testBtn = document.getElementById("rt-test");
-  const matchesEl = document.getElementById("rt-matches");
-  const statusEl = document.getElementById("rt-status");
-
-  testBtn.addEventListener("click", () => {
-    const text = textEl.value;
-    const pattern = regexEl.value;
-    const flags = flagsEl.value;
-
-    matchesEl.innerHTML = "";
-    statusEl.textContent = "";
-
-    if (!text || !pattern) {
-      statusEl.textContent = "Enter text and a regex pattern.";
-      return;
-    }
-
-    let regex;
-    try {
-      regex = new RegExp(pattern, flags);
-    } catch (err) {
-      statusEl.textContent = "Invalid regex: " + err.message;
-      return;
-    }
-
-    const results = [];
-    let match;
-
-    if (flags.includes("g")) {
-      // Global search → use exec loop
-      while ((match = regex.exec(text)) !== null) {
-        results.push(match[0]);
-
-        // Prevent infinite loop on zero‑length matches
-        if (match.index === regex.lastIndex) {
-          regex.lastIndex++;
-        }
-      }
-    } else {
-      // Non‑global → use match()
-      match = text.match(regex);
-      if (match) results.push(...match);
-    }
-
-    if (results.length === 0) {
-      statusEl.textContent = "No matches found.";
-      return;
-    }
-
-    results.forEach(m => {
-      const li = document.createElement("li");
-      li.textContent = m;
-      matchesEl.appendChild(li);
+    document.getElementById("tool-search").addEventListener("input", e => {
+      const term = e.target.value.toLowerCase();
+      const filtered = tools.filter(t =>
+        t.name.toLowerCase().includes(term) ||
+        t.desc.toLowerCase().includes(term)
+      );
+      renderToolGrid(filtered);
     });
 
-    statusEl.textContent = `Found ${results.length} match(es).`;
-  });
-})();
-</script>
+    function openTool(id) {
+      const wrapper = document.getElementById("active-tool-wrapper");
+      const title = document.getElementById("active-tool-title");
+      const subtitle = document.getElementById("active-tool-subtitle");
+      const content = document.getElementById("active-tool-content");
 
+      const tool = tools.find(t => t.id === id);
+      const ui = document.getElementById(id);
 
+      document.querySelectorAll(".tool-ui").forEach(el => el.style.display = "none");
 
+      wrapper.classList.remove("hidden");
 
-<!-- PDF Manager Script -->
-<script>
-(() => {
-  const fileInput = document.getElementById("pdf-files");
-  const mergeBtn = document.getElementById("pdf-merge");
-  const splitBtn = document.getElementById("pdf-split");
-  const textBtn = document.getElementById("pdf-text");
-  const statusEl = document.getElementById("pdf-status");
-  const downloadEl = document.getElementById("pdf-download");
-  const outputEl = document.getElementById("pdf-output");
+      title.textContent = tool.name;
+      subtitle.textContent = tool.desc;
 
-  // Helper: read file as ArrayBuffer
-  function readFile(file) {
-    return new Promise(resolve => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.readAsArrayBuffer(file);
-    });
-  }
+      content.innerHTML = "";
+      ui.style.display = "block";
+      ui.classList.add("tool-slide");
+      content.appendChild(ui);
 
-  // -----------------------------
-  // MERGE PDFs
-  // -----------------------------
-  mergeBtn.addEventListener("click", async () => {
-    const files = fileInput.files;
-    if (files.length < 2) {
-      statusEl.textContent = "Select at least 2 PDFs.";
-      return;
+      setTimeout(() => ui.classList.add("active"), 10);
+
+      wrapper.scrollIntoView({ behavior: "smooth" });
     }
 
-    statusEl.textContent = "Merging…";
+    function closeActiveTool() {
+      const wrapper = document.getElementById("active-tool-wrapper");
+      const content = document.getElementById("active-tool-content");
 
-    const mergedPdf = await PDFLib.PDFDocument.create();
+      const active = content.querySelector(".tool-slide");
+      if (active) active.classList.remove("active");
 
-    for (let file of files) {
-      const bytes = await readFile(file);
-      const pdf = await PDFLib.PDFDocument.load(bytes);
-      const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-      pages.forEach(p => mergedPdf.addPage(p));
+      setTimeout(() => {
+        wrapper.classList.add("hidden");
+
+        const main = document.querySelector("main");
+        document.querySelectorAll(".tool-ui").forEach(ui => {
+          if (!main.contains(ui)) {
+            ui.style.display = "none";
+            ui.classList.remove("tool-slide", "active");
+            main.appendChild(ui);
+          }
+        });
+
+        content.innerHTML = "";
+      }, 250);
     }
 
-    const mergedBytes = await mergedPdf.save();
-    const blob = new Blob([mergedBytes], { type: "application/pdf" });
+    renderToolGrid();
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
-    downloadEl.href = URL.createObjectURL(blob);
-    downloadEl.download = "merged.pdf";
-    downloadEl.style.display = "inline-block";
+  <!-- QR Generator Script -->
+  <script>
+    (() => {
+      const input = document.getElementById("qr-input");
+      const generateBtn = document.getElementById("qr-generate");
+      const canvas = document.getElementById("qr-canvas");
+      const downloadBtn = document.getElementById("qr-download");
 
-    statusEl.textContent = "Merge complete.";
-  });
+      generateBtn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (!text) {
+          alert("Please enter text or a URL.");
+          return;
+        }
 
-  // -----------------------------
-  // SPLIT PDF INTO PAGES
-  // -----------------------------
-  splitBtn.addEventListener("click", async () => {
-    const files = fileInput.files;
-    if (files.length !== 1) {
-      statusEl.textContent = "Select exactly 1 PDF to split.";
-      return;
-    }
+        QRCode.toCanvas(canvas, text, { width: 180 }, (error) => {
+          if (error) {
+            console.error(error);
+            alert("QR generation failed.");
+            return;
+          }
 
-    statusEl.textContent = "Splitting…";
+          downloadBtn.onclick = () => {
+            const url = canvas.toDataURL("image/png");
+            downloadBtn.href = url;
+            downloadBtn.download = "qr-code.png";
+          };
+        });
+      });
+    })();
+  </script>
 
-    const bytes = await readFile(files[0]);
-    const pdf = await PDFLib.PDFDocument.load(bytes);
+  <!-- Password Generator Script -->
+  <script>
+    (() => {
+      const lengthEl = document.getElementById("pw-length");
+      const lowerEl = document.getElementById("pw-lower");
+      const upperEl = document.getElementById("pw-upper");
+      const numberEl = document.getElementById("pw-numbers");
+      const symbolEl = document.getElementById("pw-symbols");
+      const outputEl = document.getElementById("pw-output");
+      const generateBtn = document.getElementById("pw-generate");
+      const copyBtn = document.getElementById("pw-copy");
 
-    const pageCount = pdf.getPageCount();
-    const zip = new JSZip();
+      const LOWER = "abcdefghijklmnopqrstuvwxyz";
+      const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const NUMBERS = "0123456789";
+      const SYMBOLS = "!@#$%^&*()_+-=[]{}|;:,.<>/?";
 
-    for (let i = 0; i < pageCount; i++) {
-      const newPdf = await PDFLib.PDFDocument.create();
-      const [page] = await newPdf.copyPages(pdf, [i]);
-      newPdf.addPage(page);
+      function generatePassword() {
+        const length = parseInt(lengthEl.value, 10);
+        let chars = "";
 
-      const pageBytes = await newPdf.save();
-      zip.file(`page-${i + 1}.pdf`, pageBytes);
-    }
+        if (lowerEl.checked) chars += LOWER;
+        if (upperEl.checked) chars += UPPER;
+        if (numberEl.checked) chars += NUMBERS;
+        if (symbolEl.checked) chars += SYMBOLS;
 
-    const zipBlob = await zip.generateAsync({ type: "blob" });
+        if (!chars.length) {
+          outputEl.value = "";
+          alert("Select at least one character type.");
+          return;
+        }
 
-    downloadEl.href = URL.createObjectURL(zipBlob);
-    downloadEl.download = "split-pages.zip";
-    downloadEl.style.display = "inline-block";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+          const index = Math.floor(Math.random() * chars.length);
+          password += chars[index];
+        }
 
-    statusEl.textContent = "Split complete.";
-  });
-
-  // -----------------------------
-  // EXTRACT TEXT
-  // -----------------------------
-  textBtn.addEventListener("click", async () => {
-    const files = fileInput.files;
-    if (files.length !== 1) {
-      statusEl.textContent = "Select exactly 1 PDF.";
-      return;
-    }
-
-    statusEl.textContent = "Extracting text…";
-
-    const bytes = await readFile(files[0]);
-    const pdf = await PDFLib.PDFDocument.load(bytes);
-
-    let fullText = "";
-
-    // PDF-LIB does not extract text natively.
-    // We use a fallback: try to read raw content streams.
-    for (let i = 0; i < pdf.getPageCount(); i++) {
-      const page = pdf.getPage(i);
-      const content = page.getContents();
-
-      if (content && content.length) {
-        fullText += `--- Page ${i + 1} ---\n`;
-        fullText += "(Raw PDF content stream — actual text extraction requires a parser)\n\n";
+        outputEl.value = password;
       }
-    }
 
-    outputEl.style.display = "block";
-    outputEl.value = fullText || "No extractable text found.";
+      generateBtn.addEventListener("click", generatePassword);
 
-    statusEl.textContent = "Text extraction complete.";
-  });
-})();
-</script>
+      copyBtn.addEventListener("click", () => {
+        if (!outputEl.value) return;
+        navigator.clipboard.writeText(outputEl.value);
+        alert("Password copied!");
+      });
+    })();
+  </script>
 
+  <!-- JSON Formatter Script -->
+  <script>
+    (() => {
+      const input = document.getElementById("json-input");
+      const output = document.getElementById("json-output");
+      const formatBtn = document.getElementById("json-format");
 
+      formatBtn.addEventListener("click", () => {
+        const raw = input.value.trim();
 
+        if (!raw) {
+          output.value = "Input is empty.";
+          return;
+        }
 
-<!-- Background Remover Script -->
-<script>
-(() => {
-  const fileInput = document.getElementById("bg-file");
-  const removeBtn = document.getElementById("bg-remove");
-  const statusEl = document.getElementById("bg-status");
-  const canvas = document.getElementById("bg-canvas");
-  const downloadBtn = document.getElementById("bg-download");
+        try {
+          const parsed = JSON.parse(raw);
+          output.value = JSON.stringify(parsed, null, 2);
+        } catch (err) {
+          output.value = "Invalid JSON:\n" + err.message;
+        }
+      });
+    })();
+  </script>
 
-  let model = null;
+  <!-- Randomizer Script -->
+  <script>
+    (() => {
+      const typeSelect = document.getElementById("random-type");
+      const output = document.getElementById("random-output");
+      const generateBtn = document.getElementById("random-generate");
 
-  async function loadModel() {
-    statusEl.textContent = "Loading AI model…";
-    model = await bodyPix.load();
-    statusEl.textContent = "Model ready.";
-  }
+      const names = [
+        "Alex", "Jordan", "Taylor", "Chris", "Morgan",
+        "Sam", "Jamie", "Casey", "Riley", "Cameron"
+      ];
 
-  loadModel();
+      generateBtn.addEventListener("click", () => {
+        const type = typeSelect.value;
 
-  removeBtn.addEventListener("click", async () => {
-    if (!fileInput.files.length) {
-      statusEl.textContent = "Upload an image first.";
-      return;
-    }
+        if (type === "number") {
+          const num = Math.floor(Math.random() * 1000) + 1;
+          output.textContent = `Random Number: ${num}`;
+        }
 
-    statusEl.textContent = "Processing…";
+        if (type === "name") {
+          const name = names[Math.floor(Math.random() * names.length)];
+          output.textContent = `Random Name: ${name}`;
+        }
+      });
+    })();
+  </script>
 
-    const img = new Image();
-    img.src = URL.createObjectURL(fileInput.files[0]);
+  <!-- Currency Converter Script -->
+  <script>
+    (() => {
+      const amountEl = document.getElementById("cc-amount");
+      const fromEl = document.getElementById("cc-from");
+      const toEl = document.getElementById("cc-to");
+      const convertBtn = document.getElementById("cc-convert");
+      const resultEl = document.getElementById("cc-result");
 
-    img.onload = async () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
+      convertBtn.addEventListener("click", async () => {
+        const amount = parseFloat(amountEl.value);
+        const from = fromEl.value;
+        const to = toEl.value;
 
+        if (!amount || amount <= 0) {
+          resultEl.textContent = "Enter a valid amount.";
+          return;
+        }
+
+        try {
+          const url = `https://api.exchangerate.host/latest?base=${from}&symbols=${to}`;
+          const res = await fetch(url);
+          const data = await res.json();
+
+          if (!data || !data.rates || !data.rates[to]) {
+            resultEl.textContent = "Conversion failed.";
+            return;
+          }
+
+          const rate = data.rates[to];
+          const converted = amount * rate;
+
+          resultEl.textContent = `${converted.toFixed(2)} ${to}`;
+        } catch (err) {
+          console.error(err);
+          resultEl.textContent = "Error fetching live rates.";
+        }
+      });
+    })();
+  </script>
+
+  <!-- Image Compressor Script -->
+  <script>
+    (() => {
+      const fileInput = document.getElementById("ic-file");
+      const qualityInput = document.getElementById("ic-quality");
+      const compressBtn = document.getElementById("ic-compress");
+      const originalEl = document.getElementById("ic-original");
+      const compressedEl = document.getElementById("ic-compressed");
+      const downloadBtn = document.getElementById("ic-download");
+
+      let selectedImage = null;
+
+      fileInput.addEventListener("change", () => {
+        selectedImage = fileInput.files[0];
+        if (selectedImage) {
+          originalEl.textContent = (selectedImage.size / 1024).toFixed(2) + " KB";
+        }
+      });
+
+      compressBtn.addEventListener("click", () => {
+        if (!selectedImage) {
+          alert("Please upload an image first.");
+          return;
+        }
+
+        const quality = parseFloat(qualityInput.value);
+        const reader = new FileReader();
+
+        reader.readAsDataURL(selectedImage);
+
+        reader.onload = event => {
+          const img = new Image();
+          img.src = event.target.result;
+
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            const compressedData = canvas.toDataURL("image/jpeg", quality);
+
+            const byteString = atob(compressedData.split(",")[1]);
+            const arrayBuffer = new ArrayBuffer(byteString.length);
+            const uintArray = new Uint8Array(arrayBuffer);
+
+            for (let i = 0; i < byteString.length; i++) {
+              uintArray[i] = byteString.charCodeAt(i);
+            }
+
+            const compressedBlob = new Blob([uintArray], { type: "image/jpeg" });
+
+            compressedEl.textContent = (compressedBlob.size / 1024).toFixed(2) + " KB";
+
+            downloadBtn.href = URL.createObjectURL(compressedBlob);
+            downloadBtn.style.display = "inline-block";
+          };
+        };
+      });
+    })();
+  </script>
+
+  <!-- Time Zone Converter Script -->
+  <script>
+    (() => {
+      const tzInput = document.getElementById("tz-input");
+      const tzFrom = document.getElementById("tz-from");
+      const tzTo = document.getElementById("tz-to");
+      const tzConvert = document.getElementById("tz-convert");
+      const tzResult = document.getElementById("tz-result");
+
+      const zones = Intl.supportedValuesOf("timeZone");
+      zones.forEach(zone => {
+        const opt1 = document.createElement("option");
+        opt1.value = zone;
+        opt1.textContent = zone;
+
+        const opt2 = document.createElement("option");
+        opt2.value = zone;
+        opt2.textContent = zone;
+
+        tzFrom.appendChild(opt1);
+        tzTo.appendChild(opt2);
+      });
+
+      tzFrom.value = "America/Chicago";
+      tzTo.value = "UTC";
+
+      tzConvert.addEventListener("click", () => {
+        const inputValue = tzInput.value;
+        if (!inputValue) {
+          tzResult.textContent = "Select a date and time first.";
+          return;
+        }
+
+        const fromZone = tzFrom.value;
+        const toZone = tzTo.value;
+
+        const date = new Date(inputValue);
+
+        const converted = new Intl.DateTimeFormat("en-US", {
+          timeZone: toZone,
+          dateStyle: "medium",
+          timeStyle: "short"
+        }).format(date);
+
+        tzResult.textContent = `${converted} (${toZone})`;
+      });
+    })();
+  </script>
+
+  <!-- Image Converter Script -->
+  <script>
+    (() => {
+      const fileInput = document.getElementById("icv-file");
+      const formatSelect = document.getElementById("icv-format");
+      const convertBtn = document.getElementById("icv-convert");
+      const originalTypeEl = document.getElementById("icv-original-type");
+      const convertedTypeEl = document.getElementById("icv-converted-type");
+      const downloadBtn = document.getElementById("icv-download");
+
+      let selectedImage = null;
+
+      fileInput.addEventListener("change", () => {
+        selectedImage = fileInput.files[0];
+        if (selectedImage) {
+          originalTypeEl.textContent = selectedImage.type || "Unknown";
+        }
+      });
+
+      convertBtn.addEventListener("click", () => {
+        if (!selectedImage) {
+          alert("Please upload an image first.");
+          return;
+        }
+
+        const targetType = formatSelect.value;
+        const reader = new FileReader();
+
+        reader.readAsDataURL(selectedImage);
+
+        reader.onload = event => {
+          const img = new Image();
+          img.src = event.target.result;
+
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            const convertedData = canvas.toDataURL(targetType);
+
+            const byteString = atob(convertedData.split(",")[1]);
+            const arrayBuffer = new ArrayBuffer(byteString.length);
+            const uintArray = new Uint8Array(arrayBuffer);
+
+            for (let i = 0; i < byteString.length; i++) {
+              uintArray[i] = byteString.charCodeAt(i);
+            }
+
+            const convertedBlob = new Blob([uintArray], { type: targetType });
+
+            convertedTypeEl.textContent = targetType;
+
+            let ext = "jpg";
+            if (targetType === "image/png") ext = "png";
+            if (targetType === "image/webp") ext = "webp";
+
+            downloadBtn.href = URL.createObjectURL(convertedBlob);
+            downloadBtn.download = "converted-image." + ext;
+            downloadBtn.style.display = "inline-block";
+          };
+        };
+      });
+    })();
+  </script>
+
+  <!-- Base64 Tool Script -->
+  <script>
+    (() => {
+      const input = document.getElementById("b64-input");
+      const output = document.getElementById("b64-output");
+      const encodeBtn = document.getElementById("b64-encode");
+      const decodeBtn = document.getElementById("b64-decode");
+
+      function encodeUTF8(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+      }
+
+      function decodeUTF8(str) {
+        return decodeURIComponent(escape(atob(str)));
+      }
+
+      encodeBtn.addEventListener("click", () => {
+        try {
+          const text = input.value;
+          output.value = encodeUTF8(text);
+        } catch (err) {
+          output.value = "Error encoding text.";
+        }
+      });
+
+      decodeBtn.addEventListener("click", () => {
+        try {
+          const text = input.value;
+          output.value = decodeUTF8(text);
+        } catch (err) {
+          output.value = "Error decoding Base64.";
+        }
+      });
+    })();
+  </script>
+
+  <!-- Compound Interest Script -->
+  <script>
+    (() => {
+      const principalEl = document.getElementById("ci-principal");
+      const rateEl = document.getElementById("ci-rate");
+      const yearsEl = document.getElementById("ci-years");
+      const freqEl = document.getElementById("ci-frequency");
+      const calcBtn = document.getElementById("ci-calculate");
+      const finalEl = document.getElementById("ci-final");
+      const interestEl = document.getElementById("ci-interest");
+
+      calcBtn.addEventListener("click", () => {
+        const P = parseFloat(principalEl.value);
+        const r = parseFloat(rateEl.value) / 100;
+        const t = parseFloat(yearsEl.value);
+        const n = parseFloat(freqEl.value);
+
+        if (!P || !r || !t || !n || P <= 0 || n <= 0) {
+          finalEl.textContent = "Invalid input.";
+          interestEl.textContent = "";
+          return;
+        }
+
+        const A = P * Math.pow(1 + r / n, n * t);
+        const interest = A - P;
+
+        finalEl.textContent = "$" + A.toFixed(2);
+        interestEl.textContent = "$" + interest.toFixed(2);
+      });
+    })();
+  </script>
+
+  <!-- Calorie Counter Script -->
+  <script>
+    (() => {
+      const foodInput = document.getElementById("cal-food");
+      const calInput = document.getElementById("cal-amount");
+      const addBtn = document.getElementById("cal-add");
+      const listEl = document.getElementById("cal-list");
+      const totalEl = document.getElementById("cal-total");
+      const clearBtn = document.getElementById("cal-clear");
+
+      let total = 0;
+
+      addBtn.addEventListener("click", () => {
+        const food = foodInput.value.trim();
+        const calories = parseFloat(calInput.value);
+
+        if (!food || isNaN(calories) || calories <= 0) {
+          alert("Enter valid food and calorie amount.");
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = `${food}: ${calories} kcal`;
+        listEl.appendChild(li);
+
+        total += calories;
+        totalEl.textContent = total;
+
+        foodInput.value = "";
+        calInput.value = "";
+      });
+
+      clearBtn.addEventListener("click", () => {
+        total = 0;
+        totalEl.textContent = 0;
+        listEl.innerHTML = "";
+      });
+    })();
+  </script>
+
+  <!-- Regex Tester Script -->
+  <script>
+    (() => {
+      const textEl = document.getElementById("rt-text");
+      const regexEl = document.getElementById("rt-regex");
+      const flagsEl = document.getElementById("rt-flags");
+      const testBtn = document.getElementById("rt-test");
+      const matchesEl = document.getElementById("rt-matches");
+      const statusEl = document.getElementById("rt-status");
+
+      testBtn.addEventListener("click", () => {
+        const text = textEl.value;
+        const pattern = regexEl.value;
+        const flags = flagsEl.value;
+
+        matchesEl.innerHTML = "";
+        statusEl.textContent = "";
+
+        if (!text || !pattern) {
+          statusEl.textContent = "Enter text and a regex pattern.";
+          return;
+        }
+
+        let regex;
+        try {
+          regex = new RegExp(pattern, flags);
+        } catch (err) {
+          statusEl.textContent = "Invalid regex: " + err.message;
+          return;
+        }
+
+        const results = [];
+        let match;
+
+        if (flags.includes("g")) {
+          while ((match = regex.exec(text)) !== null) {
+            results.push(match[0]);
+
+            if (match.index === regex.lastIndex) {
+              regex.lastIndex++;
+            }
+          }
+        } else {
+          match = text.match(regex);
+          if (match) results.push(...match);
+        }
+
+        if (results.length === 0) {
+          statusEl.textContent = "No matches found.";
+          return;
+        }
+
+        results.forEach(m => {
+          const li = document.createElement("li");
+          li.textContent = m;
+          matchesEl.appendChild(li);
+        });
+
+        statusEl.textContent = `Found ${results.length} match(es).`;
+      });
+    })();
+  </script>
+
+  <!-- PDF Manager Script -->
+  <script>
+    (() => {
+      const fileInput = document.getElementById("pdf-files");
+      const mergeBtn = document.getElementById("pdf-merge");
+      const splitBtn = document.getElementById("pdf-split");
+      const textBtn = document.getElementById("pdf-text");
+      const statusEl = document.getElementById("pdf-status");
+      const downloadEl = document.getElementById("pdf-download");
+      const outputEl = document.getElementById("pdf-output");
+
+      function readFile(file) {
+        return new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsArrayBuffer(file);
+        });
+      }
+
+      mergeBtn.addEventListener("click", async () => {
+        const files = fileInput.files;
+        if (files.length < 2) {
+          statusEl.textContent = "Select at least 2 PDFs.";
+          return;
+        }
+
+        statusEl.classList.add("status-glow");
+        statusEl.textContent = "Merging…";
+
+        const mergedPdf = await PDFLib.PDFDocument.create();
+
+        for (let file of files) {
+          const bytes = await readFile(file);
+          const pdf = await PDFLib.PDFDocument.load(bytes);
+          const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+          pages.forEach(p => mergedPdf.addPage(p));
+        }
+
+        const mergedBytes = await mergedPdf.save();
+        const blob = new Blob([mergedBytes], { type: "application/pdf" });
+
+        downloadEl.href = URL.createObjectURL(blob);
+        downloadEl.download = "merged.pdf";
+        downloadEl.style.display = "inline-block";
+
+        statusEl.classList.remove("status-glow");
+        statusEl.textContent = "Merge complete.";
+      });
+
+      splitBtn.addEventListener("click", async () => {
+        const files = fileInput.files;
+        if (files.length !== 1) {
+          statusEl.textContent = "Select exactly 1 PDF to split.";
+          return;
+        }
+
+        statusEl.classList.add("status-glow");
+        statusEl.textContent = "Splitting…";
+
+        const bytes = await readFile(files[0]);
+        const pdf = await PDFLib.PDFDocument.load(bytes);
+
+        const pageCount = pdf.getPageCount();
+        const zip = new JSZip();
+
+        for (let i = 0; i < pageCount; i++) {
+          const newPdf = await PDFLib.PDFDocument.create();
+          const [page] = await newPdf.copyPages(pdf, [i]);
+          newPdf.addPage(page);
+
+          const pageBytes = await newPdf.save();
+          zip.file(`page-${i + 1}.pdf`, pageBytes);
+        }
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+
+        downloadEl.href = URL.createObjectURL(zipBlob);
+        downloadEl.download = "split-pages.zip";
+        downloadEl.style.display = "inline-block";
+
+        statusEl.classList.remove("status-glow");
+        statusEl.textContent = "Split complete.";
+      });
+
+      textBtn.addEventListener("click", async () => {
+        const files = fileInput.files;
+        if (files.length !== 1) {
+          statusEl.textContent = "Select exactly 1 PDF.";
+          return;
+        }
+
+        statusEl.classList.add("status-glow");
+        statusEl.textContent = "Extracting text…";
+
+        const bytes = await readFile(files[0]);
+        const pdf = await PDFLib.PDFDocument.load(bytes);
+
+        let fullText = "";
+
+        for (let i = 0; i < pdf.getPageCount(); i++) {
+          const page = pdf.getPage(i);
+          const content = page.getContents();
+
+          if (content && content.length) {
+            fullText += `--- Page ${i + 1} ---\n`;
+            fullText += "(Raw PDF content stream — actual text extraction requires a parser)\n\n";
+          }
+        }
+
+        outputEl.style.display = "block";
+        outputEl.value = fullText || "No extractable text found.";
+
+        statusEl.classList.remove("status-glow");
+        statusEl.textContent = "Text extraction complete.";
+      });
+    })();
+  </script>
+
+  <!-- Background Remover Script -->
+  <script>
+    (() => {
+      const fileInput = document.getElementById("bg-file");
+      const removeBtn = document.getElementById("bg-remove");
+      const statusEl = document.getElementById("bg-status");
+      const canvas = document.getElementById("bg-canvas");
+      const downloadBtn = document.getElementById("bg-download");
+
+      let model = null;
+
+      async function loadModel() {
+        statusEl.textContent = "Loading AI model…";
+        model = await bodyPix.load();
+        statusEl.textContent = "Model ready.";
+      }
+
+      loadModel();
+
+      removeBtn.addEventListener("click", async () => {
+        if (!fileInput.files.length) {
+          statusEl.textContent = "Upload an image first.";
+          return;
+        }
+
+        statusEl.classList.add("status-glow");
+        statusEl.textContent = "Processing…";
+
+        const img = new Image();
+        img.src = URL.createObjectURL(fileInput.files[0]);
+
+        img.onload = async () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+
+          const segmentation = await model.segmentPerson(img);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+
+          for (let i = 0; i < data.length; i += 4) {
+            const j = i / 4;
+            if (segmentation.data[j] === 0) {
+              data[i + 3] = 0;
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+
+          canvas.classList.remove("hidden");
+          downloadBtn.href = canvas.toDataURL("image/png");
+          downloadBtn.download = "no-background.png";
+          downloadBtn.style.display = "inline-block";
+
+          statusEl.classList.remove("status-glow");
+          statusEl.textContent = "Background removed.";
+        };
+      });
+    })();
+  </script>
+
+  <!-- Unit Price Calculator Script -->
+  <script>
+    (() => {
+      const unitToBase = {
+        each: { factor: 1, label: "each" },
+        g:    { factor: 1, label: "g" },
+        kg:   { factor: 1000, label: "g" },
+        ml:   { factor: 1, label: "ml" },
+        l:    { factor: 1000, label: "ml" },
+        oz:   { factor: 1, label: "oz" },
+        lb:   { factor: 16, label: "oz" }
+      };
+
+      const els = id => document.getElementById(id);
+
+      const aLabel    = els("up-a-label");
+      const aPrice    = els("up-a-price");
+      const aQty      = els("up-a-qty");
+      const aUnit     = els("up-a-unit");
+      const aDiscount = els("up-a-discount");
+      const aTax      = els("up-a-tax");
+
+      const bLabel    = els("up-b-label");
+      const bPrice    = els("up-b-price");
+      const bQty      = els("up-b-qty");
+      const bUnit     = els("up-b-unit");
+      const bDiscount = els("up-b-discount");
+      const bTax      = els("up-b-tax");
+
+      const calcBtn   = els("up-calc");
+      const clearBtn  = els("up-clear");
+
+      const aResult   = els("up-a-result");
+      const bResult   = els("up-b-result");
+      const compareEl = els("up-compare");
+
+      function parseNum(input) {
+        const v = parseFloat(input.value);
+        return isNaN(v) ? null : v;
+      }
+
+      function effectivePrice(price, discount, taxPercent) {
+        let p = price ?? 0;
+        if (discount && discount > 0) p -= discount;
+        if (taxPercent && taxPercent > 0) p += p * (taxPercent / 100);
+        return p;
+      }
+
+      function normalizeQuantity(qty, unit) {
+        const meta = unitToBase[unit] || unitToBase["each"];
+        return { baseQty: qty * meta.factor, baseLabel: meta.label };
+      }
+
+      function formatCurrency(v) {
+        if (v == null || isNaN(v)) return "—";
+        return "$" + v.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+      }
+
+      function calcItem(labelInput, priceInput, qtyInput, unitSelect, discountInput, taxInput) {
+        const price = parseNum(priceInput);
+        const qty   = parseNum(qtyInput);
+        const disc  = parseNum(discountInput);
+        const tax   = parseNum(taxInput);
+        const unit  = unitSelect.value;
+
+        if (price == null || qty == null || qty <= 0) return null;
+
+        const effPrice = effectivePrice(price, disc, tax);
+        const { baseQty, baseLabel } = normalizeQuantity(qty, unit);
+        const perUnit = effPrice / baseQty;
+
+        return {
+          label: labelInput.value || "Item",
+          price,
+          effPrice,
+          qty,
+          unit,
+          baseQty,
+          baseLabel,
+          perUnit
+        };
+      }
+
+      function renderItemResult(item, targetEl, tag) {
+        if (!item) {
+          targetEl.textContent = `${tag}: Not enough data to calculate.`;
+          return;
+        }
+
+        targetEl.textContent =
+          `${tag} – ${item.label}: ` +
+          `Price ${formatCurrency(item.price)}, ` +
+          `Effective ${formatCurrency(item.effPrice)} for ` +
+          `${item.qty} ${item.unit} ` +
+          `(${item.baseQty.toFixed(2)} ${item.baseLabel}), ` +
+          `Cost per ${item.baseLabel}: ${formatCurrency(item.perUnit)}.`;
+      }
+
+      calcBtn.addEventListener("click", () => {
+        const itemA = calcItem(aLabel, aPrice, aQty, aUnit, aDiscount, aTax);
+        const itemB = calcItem(bLabel, bPrice, bQty, bUnit, bDiscount, bTax);
+
+        renderItemResult(itemA, aResult, "Item A");
+        renderItemResult(itemB, bResult, "Item B");
+
+        compareEl.textContent = "";
+
+        if (itemA && itemB && itemA.baseLabel === itemB.baseLabel) {
+          if (itemA.perUnit < itemB.perUnit) {
+            compareEl.textContent =
+              `Cheaper: Item A (${itemA.label}) at ${formatCurrency(itemA.perUnit)} per ${itemA.baseLabel}.`;
+          } else if (itemB.perUnit < itemA.perUnit) {
+            compareEl.textContent =
+              `Cheaper: Item B (${itemB.label}) at ${formatCurrency(itemB.perUnit)} per ${itemB.baseLabel}.`;
+          } else {
+            compareEl.textContent =
+              `Both items have the same cost per ${itemA.baseLabel}.`;
+          }
+        } else if (itemA && itemB) {
+          compareEl.textContent =
+            `Items use different base units (${itemA.baseLabel} vs ${itemB.baseLabel}). ` +
+            `Comparison is approximate only.`;
+        }
+      });
+
+      clearBtn.addEventListener("click", () => {
+        [aLabel, aPrice, aQty, aDiscount, aTax,
+         bLabel, bPrice, bQty, bDiscount, bTax].forEach(el => el.value = "");
+
+        aUnit.value = "each";
+        bUnit.value = "each";
+
+        aResult.textContent = "";
+        bResult.textContent = "";
+        compareEl.textContent = "";
+      });
+    })();
+  </script>
+
+  <!-- Meme Generator Script -->
+  <script>
+    (() => {
+      const fileInput = document.getElementById("meme-image");
+      const topInput = document.getElementById("meme-top");
+      const bottomInput = document.getElementById("meme-bottom");
+      const fontSelect = document.getElementById("meme-font");
+      const sizeRange = document.getElementById("meme-size");
+      const colorInput = document.getElementById("meme-color");
+      const outlineInput = document.getElementById("meme-outline");
+      const stickerSelect = document.getElementById("meme-sticker");
+      const ideaInput = document.getElementById("meme-idea");
+      const generateBtn = document.getElementById("meme-generate");
+      const canvas = document.getElementById("meme-canvas");
       const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
+      const downloadBtn = document.getElementById("meme-download");
 
-      const segmentation = await model.segmentPerson(img);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
+      let img = null;
 
-      for (let i = 0; i < data.length; i += 4) {
-        const j = i / 4;
-        if (segmentation.data[j] === 0) {
-          data[i + 3] = 0; // make background transparent
+      const textObjects = [
+        { type: "top", text: "", x: 0, y: 0 },
+        { type: "bottom", text: "", x: 0, y: 0 }
+      ];
+
+      let stickerObj = { emoji: "", x: 0, y: 0, size: 0 };
+      let dragging = null;
+
+      function loadImage() {
+        return new Promise((resolve, reject) => {
+          if (!fileInput.files.length) {
+            reject("No image");
+            return;
+          }
+          img = new Image();
+          img.src = URL.createObjectURL(fileInput.files[0]);
+          img.onload = () => resolve();
+          img.onerror = reject;
+        });
+      }
+
+      function renderMeme() {
+        if (!img) return;
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.drawImage(img, 0, 0);
+
+        const fontSize = parseInt(sizeRange.value, 10);
+        const fontFamily = fontSelect.value;
+        const color = colorInput.value;
+        const outline = outlineInput.value;
+
+        ctx.textAlign = "center";
+        ctx.lineJoin = "round";
+        ctx.font = `${fontSize}px ${fontFamily}`;
+        ctx.fillStyle = color;
+        ctx.strokeStyle = outline;
+        ctx.lineWidth = fontSize / 15;
+
+        textObjects[0].text = (topInput.value || "").toUpperCase();
+        textObjects[1].text = (bottomInput.value || "").toUpperCase();
+
+        if (!textObjects[0].x && !textObjects[0].y) {
+          textObjects[0].x = canvas.width / 2;
+          textObjects[0].y = fontSize + 10;
         }
+        if (!textObjects[1].x && !textObjects[1].y) {
+          textObjects[1].x = canvas.width / 2;
+          textObjects[1].y = canvas.height - fontSize + 10;
+        }
+
+        textObjects.forEach(obj => {
+          if (!obj.text) return;
+          ctx.strokeText(obj.text, obj.x, obj.y);
+          ctx.fillText(obj.text, obj.x, obj.y);
+        });
+
+        const emoji = stickerSelect.value;
+        if (emoji) {
+          if (!stickerObj.emoji) {
+            stickerObj.emoji = emoji;
+            stickerObj.size = fontSize * 1.5;
+            stickerObj.x = canvas.width - stickerObj.size;
+            stickerObj.y = canvas.height - stickerObj.size;
+          } else {
+            stickerObj.emoji = emoji;
+          }
+
+          ctx.font = `${stickerObj.size}px ${fontFamily}`;
+          ctx.fillText(stickerObj.emoji, stickerObj.x, stickerObj.y);
+        }
+
+        downloadBtn.classList.remove("hidden");
+        downloadBtn.onclick = () => {
+          const url = canvas.toDataURL("image/png");
+          downloadBtn.href = url;
+          downloadBtn.download = "meme.png";
+        };
       }
 
-      ctx.putImageData(imageData, 0, 0);
-
-      downloadBtn.href = canvas.toDataURL("image/png");
-      downloadBtn.download = "no-background.png";
-      downloadBtn.style.display = "inline-block";
-
-      statusEl.textContent = "Background removed.";
-    };
-  });
-})();
-</script>
-
-
-
-
-
-
-<!-- Unit Price Calculator Script -->
-<script>
-(() => {
-  const unitToBase = {
-    each: { factor: 1, label: "each" },
-    g:    { factor: 1, label: "g" },
-    kg:   { factor: 1000, label: "g" },
-    ml:   { factor: 1, label: "ml" },
-    l:    { factor: 1000, label: "ml" },
-    oz:   { factor: 1, label: "oz" },
-    lb:   { factor: 16, label: "oz" }
-  };
-
-  const els = id => document.getElementById(id);
-
-  const aLabel    = els("up-a-label");
-  const aPrice    = els("up-a-price");
-  const aQty      = els("up-a-qty");
-  const aUnit     = els("up-a-unit");
-  const aDiscount = els("up-a-discount");
-  const aTax      = els("up-a-tax");
-
-  const bLabel    = els("up-b-label");
-  const bPrice    = els("up-b-price");
-  const bQty      = els("up-b-qty");
-  const bUnit     = els("up-b-unit");
-  const bDiscount = els("up-b-discount");
-  const bTax      = els("up-b-tax");
-
-  const calcBtn   = els("up-calc");
-  const clearBtn  = els("up-clear");
-
-  const aResult   = els("up-a-result");
-  const bResult   = els("up-b-result");
-  const compareEl = els("up-compare");
-
-  function parseNum(input) {
-    const v = parseFloat(input.value);
-    return isNaN(v) ? null : v;
-  }
-
-  function effectivePrice(price, discount, taxPercent) {
-    let p = price ?? 0;
-    if (discount && discount > 0) p -= discount;
-    if (taxPercent && taxPercent > 0) p += p * (taxPercent / 100);
-    return p;
-  }
-
-  function normalizeQuantity(qty, unit) {
-    const meta = unitToBase[unit] || unitToBase["each"];
-    return { baseQty: qty * meta.factor, baseLabel: meta.label };
-  }
-
-  function formatCurrency(v) {
-    if (v == null || isNaN(v)) return "—";
-    return "$" + v.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
-  }
-
-  function calcItem(labelInput, priceInput, qtyInput, unitSelect, discountInput, taxInput) {
-    const price = parseNum(priceInput);
-    const qty   = parseNum(qtyInput);
-    const disc  = parseNum(discountInput);
-    const tax   = parseNum(taxInput);
-    const unit  = unitSelect.value;
-
-    if (price == null || qty == null || qty <= 0) return null;
-
-    const effPrice = effectivePrice(price, disc, tax);
-    const { baseQty, baseLabel } = normalizeQuantity(qty, unit);
-    const perUnit = effPrice / baseQty;
-
-    return {
-      label: labelInput.value || "Item",
-      price,
-      effPrice,
-      qty,
-      unit,
-      baseQty,
-      baseLabel,
-      perUnit
-    };
-  }
-
-  function renderItemResult(item, targetEl, tag) {
-    if (!item) {
-      targetEl.textContent = `${tag}: Not enough data to calculate.`;
-      return;
-    }
-
-    targetEl.textContent =
-      `${tag} – ${item.label}: ` +
-      `Price ${formatCurrency(item.price)}, ` +
-      `Effective ${formatCurrency(item.effPrice)} for ` +
-      `${item.qty} ${item.unit} ` +
-      `(${item.baseQty.toFixed(2)} ${item.baseLabel}), ` +
-      `Cost per ${item.baseLabel}: ${formatCurrency(item.perUnit)}.`;
-  }
-
-  calcBtn.addEventListener("click", () => {
-    const itemA = calcItem(aLabel, aPrice, aQty, aUnit, aDiscount, aTax);
-    const itemB = calcItem(bLabel, bPrice, bQty, bUnit, bDiscount, bTax);
-
-    renderItemResult(itemA, aResult, "Item A");
-    renderItemResult(itemB, bResult, "Item B");
-
-    compareEl.textContent = "";
-
-    if (itemA && itemB && itemA.baseLabel === itemB.baseLabel) {
-      if (itemA.perUnit < itemB.perUnit) {
-        compareEl.textContent =
-          `Cheaper: Item A (${itemA.label}) at ${formatCurrency(itemA.perUnit)} per ${itemA.baseLabel}.`;
-      } else if (itemB.perUnit < itemA.perUnit) {
-        compareEl.textContent =
-          `Cheaper: Item B (${itemB.label}) at ${formatCurrency(itemB.perUnit)} per ${itemB.baseLabel}.`;
-      } else {
-        compareEl.textContent =
-          `Both items have the same cost per ${itemA.baseLabel}.`;
-      }
-    } else if (itemA && itemB) {
-      compareEl.textContent =
-        `Items use different base units (${itemA.baseLabel} vs ${itemB.baseLabel}). ` +
-        `Comparison is approximate only.`;
-    }
-  });
-
-  clearBtn.addEventListener("click", () => {
-    [aLabel, aPrice, aQty, aDiscount, aTax,
-     bLabel, bPrice, bQty, bDiscount, bTax].forEach(el => el.value = "");
-
-    aUnit.value = "each";
-    bUnit.value = "each";
-
-    aResult.textContent = "";
-    bResult.textContent = "";
-    compareEl.textContent = "";
-  });
-})();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Meme Generator Script -->
-<script>
-(() => {
-  const fileInput = document.getElementById("meme-image");
-  const topInput = document.getElementById("meme-top");
-  const bottomInput = document.getElementById("meme-bottom");
-  const fontSelect = document.getElementById("meme-font");
-  const sizeRange = document.getElementById("meme-size");
-  const colorInput = document.getElementById("meme-color");
-  const outlineInput = document.getElementById("meme-outline");
-  const stickerSelect = document.getElementById("meme-sticker");
-  const ideaInput = document.getElementById("meme-idea");
-  const generateBtn = document.getElementById("meme-generate");
-  const canvas = document.getElementById("meme-canvas");
-  const ctx = canvas.getContext("2d");
-  const downloadBtn = document.getElementById("meme-download");
-
-  let img = null;
-
-  const textObjects = [
-    { type: "top", text: "", x: 0, y: 0 },
-    { type: "bottom", text: "", x: 0, y: 0 }
-  ];
-
-  let stickerObj = { emoji: "", x: 0, y: 0, size: 0 };
-  let dragging = null;
-
-  function loadImage() {
-    return new Promise((resolve, reject) => {
-      if (!fileInput.files.length) {
-        reject("No image");
-        return;
-      }
-      img = new Image();
-      img.src = URL.createObjectURL(fileInput.files[0]);
-      img.onload = () => resolve();
-      img.onerror = reject;
-    });
-  }
-
-  function renderMeme() {
-    if (!img) return;
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    ctx.drawImage(img, 0, 0);
-
-    const fontSize = parseInt(sizeRange.value, 10);
-    const fontFamily = fontSelect.value;
-    const color = colorInput.value;
-    const outline = outlineInput.value;
-
-    ctx.textAlign = "center";
-    ctx.lineJoin = "round";
-    ctx.font = `${fontSize}px ${fontFamily}`;
-    ctx.fillStyle = color;
-    ctx.strokeStyle = outline;
-    ctx.lineWidth = fontSize / 15;
-
-    textObjects[0].text = (topInput.value || "").toUpperCase();
-    textObjects[1].text = (bottomInput.value || "").toUpperCase();
-
-    if (!textObjects[0].x && !textObjects[0].y) {
-      textObjects[0].x = canvas.width / 2;
-      textObjects[0].y = fontSize + 10;
-    }
-    if (!textObjects[1].x && !textObjects[1].y) {
-      textObjects[1].x = canvas.width / 2;
-      textObjects[1].y = canvas.height - fontSize + 10;
-    }
-
-    textObjects.forEach(obj => {
-      if (!obj.text) return;
-      ctx.strokeText(obj.text, obj.x, obj.y);
-      ctx.fillText(obj.text, obj.x, obj.y);
-    });
-
-    const emoji = stickerSelect.value;
-    if (emoji) {
-      if (!stickerObj.emoji) {
-        stickerObj.emoji = emoji;
-        stickerObj.size = fontSize * 1.5;
-        stickerObj.x = canvas.width - stickerObj.size;
-        stickerObj.y = canvas.height - stickerObj.size;
-      } else {
-        stickerObj.emoji = emoji;
-      }
-
-      ctx.font = `${stickerObj.size}px ${fontFamily}`;
-      ctx.fillText(stickerObj.emoji, stickerObj.x, stickerObj.y);
-    }
-
-    downloadBtn.classList.remove("hidden");
-    downloadBtn.onclick = () => {
-      const url = canvas.toDataURL("image/png");
-      downloadBtn.href = url;
-      downloadBtn.download = "meme.png";
-    };
-  }
-
-  generateBtn.addEventListener("click", async () => {
-    try {
-      await loadImage();
-
-      if (ideaInput.value && !bottomInput.value && !topInput.value) {
-        bottomInput.value = ideaInput.value;
-      }
-
-      textObjects[0].x = 0;
-      textObjects[0].y = 0;
-      textObjects[1].x = 0;
-      textObjects[1].y = 0;
-      stickerObj = { emoji: stickerSelect.value || "", x: 0, y: 0, size: 0 };
-
-      renderMeme();
-    } catch (e) {
-      alert("Please upload an image first.");
-    }
-  });
-
-  [topInput, bottomInput, fontSelect, sizeRange, colorInput, outlineInput, stickerSelect]
-    .forEach(el => el.addEventListener("input", () => img && renderMeme()));
-
-  canvas.addEventListener("mousedown", e => {
-    if (!img) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    for (const obj of textObjects) {
-      if (!obj.text) continue;
-      const approxWidth = obj.text.length * (parseInt(sizeRange.value, 10) / 2);
-      const approxHeight = parseInt(sizeRange.value, 10);
-      if (x > obj.x - approxWidth / 2 && x < obj.x + approxWidth / 2 &&
-          y > obj.y - approxHeight && y < obj.y + approxHeight / 2) {
-        dragging = { type: "text", obj };
-        return;
-      }
-    }
-
-    if (stickerObj.emoji) {
-      const s = stickerObj.size;
-      if (x > stickerObj.x - s && x < stickerObj.x + s &&
-          y > stickerObj.y - s && y < stickerObj.y + s) {
-        dragging = { type: "sticker", obj: stickerObj };
-        return;
-      }
-    }
-  });
-
-  canvas.addEventListener("mousemove", e => {
-    if (!dragging || !img) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    dragging.obj.x = x;
-    dragging.obj.y = y;
-    renderMeme();
-  });
-
-  canvas.addEventListener("mouseup", () => dragging = null);
-  canvas.addEventListener("mouseleave", () => dragging = null);
-})();
-</script>
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
-     crossorigin="anonymous"></script>
-<!-- Tools_ad_2 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5057632351845136"
-     data-ad-slot="8247956373"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-
-
-
-
-
-
-
-
-  
-
+      generateBtn.addEventListener("click", async () => {
+        try {
+          await loadImage();
+
+          if (ideaInput.value && !bottomInput.value && !topInput.value) {
+            bottomInput.value = ideaInput.value;
+          }
+
+          textObjects[0].x = 0;
+          textObjects[0].y = 0;
+          textObjects[1].x = 0;
+          textObjects[1].y = 0;
+          stickerObj = { emoji: stickerSelect.value || "", x: 0, y: 0, size: 0 };
+
+          renderMeme();
+        } catch (e) {
+          alert("Please upload an image first.");
+        }
+      });
+
+      [topInput, bottomInput, fontSelect, sizeRange, colorInput, outlineInput, stickerSelect]
+        .forEach(el => el.addEventListener("input", () => img && renderMeme()));
+
+      canvas.addEventListener("mousedown", e => {
+        if (!img) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        for (const obj of textObjects) {
+          if (!obj.text) continue;
+          const approxWidth = obj.text.length * (parseInt(sizeRange.value, 10) / 2);
+          const approxHeight = parseInt(sizeRange.value, 10);
+          if (x > obj.x - approxWidth / 2 && x < obj.x + approxWidth / 2 &&
+              y > obj.y - approxHeight && y < obj.y + approxHeight / 2) {
+            dragging = { type: "text", obj };
+            return;
+          }
+        }
+
+        if (stickerObj.emoji) {
+          const s = stickerObj.size;
+          if (x > stickerObj.x - s && x < stickerObj.x + s &&
+              y > stickerObj.y - s && y < stickerObj.y + s) {
+            dragging = { type: "sticker", obj: stickerObj };
+            return;
+          }
+        }
+      });
+
+      canvas.addEventListener("mousemove", e => {
+        if (!dragging || !img) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        dragging.obj.x = x;
+        dragging.obj.y = y;
+        renderMeme();
+      });
+
+      canvas.addEventListener("mouseup", () => dragging = null);
+      canvas.addEventListener("mouseleave", () => dragging = null);
+    })();
+  </script>
 
   <!-- Footer -->
   <footer class="text-center py-6 text-slate-500">

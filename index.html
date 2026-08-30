@@ -1,87 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<head>
-  <meta charset="UTF-8">
-
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
-          crossorigin="anonymous"></script>
-
-  <!-- your other head tags -->
-</head>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
-
 <link rel="icon" type="image/png" href="images/toolwiki-favicon.png">
 
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Toolwiki</title>
+<link rel="stylesheet" href="style.css" />
 
-  <title>Toolwiki</title>
-  <link rel="stylesheet" href="style.css" />
+<style>
+  /* MOBILE OPTIMIZATION */
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  header {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  header .logo {
+    width: 180px;
+    max-width: 70%;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+
+  .enter-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  .enter-button {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    display: inline-block;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Boot overlay responsive */
+  #boot-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    color: #38bdf8;
+    font-family: monospace;
+    padding: 20px;
+    font-size: 0.9rem;
+    overflow-y: auto;
+  }
+
+  #boot-text {
+    white-space: pre-line;
+    line-height: 1.4rem;
+  }
+
+  /* Matrix canvas fix */
+  #matrix {
+    position: fixed;
+    inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -1;
+  }
+
+  /* Mobile spacing */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.3rem;
+    }
+
+    .enter-button {
+      width: 80%;
+      font-size: 1.2rem;
+    }
+
+    #boot-overlay {
+      font-size: 0.8rem;
+      padding: 15px;
+    }
+  }
+</style>
+
 </head>
 
 <body>
+
 <canvas id="matrix"></canvas>
 
 <div id="boot-overlay">
   <div id="boot-text"></div>
 </div>
 
-  
-
-
 <header>
-  <img src=" images/toolwiki-logo.png" alt="Toolwiki Logo"  class="logo fade-in" >
+  <img src="images/toolwiki-logo.png" alt="Toolwiki Logo" class="logo fade-in">
   <h1>Quick, free utilities for daily life</h1>
-  <p></p>
 </header>
 
-
-
-
-  <main>
- 
 <main>
   <div class="enter-container">
     <a href="tools.html" class="enter-button">Enter</a>
   </div>
 </main>
 
-  </main>
-
-
 <footer>
   <p>© <span id="year"></span> Toolwiki · Built for quick utility & ad-supported access.</p>
 </footer>
 
-
-
-  <script src="script.js"></script>
-
-
+<script src="script.js"></script>
 
 <script>
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
 
 const symbols = ["</>", "{ }", "()", "[]", "UTIL", "SYS"];
-
 const fontSize = 16;
-const columns = canvas.width / fontSize;
-
-const drops = Array(Math.floor(columns)).fill(1);
+let columns = canvas.width / fontSize;
+let drops = Array(Math.floor(columns)).fill(1);
 
 function drawMatrix() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle ="#38bdf8" ; /* Toolwiki neon blue */
+  ctx.fillStyle = "#38bdf8";
   ctx.font = fontSize + "px monospace";
 
   drops.forEach((y, i) => {
@@ -98,12 +161,11 @@ function drawMatrix() {
 setInterval(drawMatrix, 50);
 
 window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  resizeCanvas();
+  columns = canvas.width / fontSize;
+  drops = Array(Math.floor(columns)).fill(1);
 });
 </script>
-
-
 
 <script>
 const bootLines = [
@@ -120,13 +182,12 @@ const bootLines = [
 let index = 0;
 const bootText = document.getElementById("boot-text");
 const bootOverlay = document.getElementById("boot-overlay");
-const landingContent = document.querySelector(".landing-content");
 
 function typeLine() {
   if (index < bootLines.length) {
     bootText.textContent += bootLines[index] + "\n";
     index++;
-    setTimeout(typeLine, 400); // typing speed
+    setTimeout(typeLine, 400);
   } else {
     setTimeout(() => {
       bootOverlay.style.opacity = "0";
@@ -134,7 +195,6 @@ function typeLine() {
 
       setTimeout(() => {
         bootOverlay.style.display = "none";
-        landingContent.style.opacity = "1";
       }, 1000);
 
     }, 800);
@@ -144,16 +204,8 @@ function typeLine() {
 typeLine();
 </script>
 
-
-
-
-
 </body>
 </html>
-
-
-
-
 
 
 
