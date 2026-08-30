@@ -240,25 +240,20 @@ footer {
 
 
 
+
+
 .logo {
-  width: clamp(220px, 35vw, 600px);
+  max-width: 80%;
   height: auto;
-  filter: drop-shadow(0 0 22px var(--accent));
 }
-
-
-@media (min-width: 1024px) {
-  .logo {
-    width: 520px;
-  }
-}
-
 
 @media (max-width: 600px) {
   .logo {
-    width: 75%;
+    max-width: 60%;
   }
 }
+
+
 
 
 
