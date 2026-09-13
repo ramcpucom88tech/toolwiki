@@ -46,7 +46,8 @@
  
 <main>
   <div class="enter-container">
-    <a href="tools.html" class="enter-button">Enter</a>
+    <a onclick="playTransition()" class="enter-button">Enter</a>
+
   </div>
 </main>
 
@@ -143,6 +144,33 @@ function typeLine() {
 
 typeLine();
 </script>
+
+
+<!-- Transition Video Overlay -->
+<div id="transitionVideo" class="fixed inset-0 hidden bg-black z-50">
+  <video id="toolwikiTransition" class="w-full h-full object-cover">
+    <source src="transition.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<script>
+  function playTransition() {
+    const overlay = document.getElementById("transitionVideo");
+    const video = document.getElementById("toolwikiTransition");
+
+    overlay.classList.remove("hidden");
+    video.play();
+
+    video.onended = () => {
+      window.location.href = "tools.html";
+    };
+  }
+</script>
+
+
+
+
 
 
 
