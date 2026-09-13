@@ -347,7 +347,7 @@ footer {
   color: #38bdf8; /* Toolwiki blue */
   font-family: monospace;
   padding: 40px;
-  z-index: 9999;
+  z-index: 100;
   overflow: hidden;
 }
 
