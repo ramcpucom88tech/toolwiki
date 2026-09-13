@@ -510,13 +510,15 @@ button:hover {
 
 
 
-
 #matrix {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 0 !important;
+  pointer-events: none;
 }
+
+
 
 
 
@@ -534,3 +536,44 @@ button:hover {
 
 
 
+
+
+
+/* Put the matrix canvas at the very bottom */
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+/* Boot overlay above matrix but below page content */
+#boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+/* Your header, main, footer should be above matrix + boot */
+header, main, footer {
+  position: relative;
+  z-index: 200;
+}
+
+/* Transition video overlay must be on top of EVERYTHING */
+#transitionVideo {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+/* Make the video fill the entire screen */
+#transitionVideo video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
