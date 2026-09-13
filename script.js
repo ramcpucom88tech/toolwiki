@@ -18,6 +18,18 @@ document.getElementById("tool-search").addEventListener("input", (e) => {
 
 
 
+function playTransition() {
+  console.log("Overlay triggered"); // ← MUST appear in console
+  const overlay = document.getElementById("transitionVideo");
+  const video = document.getElementById("toolwikiTransition");
+
+  overlay.classList.remove("hidden");
+  console.log(overlay.classList); // ← check if "hidden" is gone
+
+  video.play();
+}
+
+
 
 
   // ===============================
