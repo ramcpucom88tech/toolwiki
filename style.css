@@ -538,37 +538,47 @@ button:hover {
 
 
 
-
-/* Put the matrix canvas at the very bottom */
+/* MATRIX CANVAS — MUST BE AT THE VERY BOTTOM */
 #matrix {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0 !important;
   pointer-events: none;
+  background: black;
 }
 
-/* Boot overlay above matrix but below page content */
+/* BOOT OVERLAY — ABOVE MATRIX BUT BELOW PAGE CONTENT */
 #boot-overlay {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  color: #38bdf8;
+  font-family: monospace;
+  padding: 40px;
+  z-index: 100;   /* FIXED — was 9999 */
+  overflow: hidden;
 }
 
-/* Your header, main, footer should be above matrix + boot */
+/* PAGE CONTENT — ABOVE MATRIX + BOOT */
 header, main, footer {
   position: relative;
   z-index: 200;
 }
 
-/* Transition video overlay must be on top of EVERYTHING */
+/* TRANSITION VIDEO OVERLAY — MUST BE ON TOP OF EVERYTHING */
 #transitionVideo {
   position: fixed;
   inset: 0;
   z-index: 9999;
+  background: black;
 }
 
-/* Make the video fill the entire screen */
+/* MAKE THE VIDEO FILL THE ENTIRE SCREEN */
 #transitionVideo video {
   position: absolute;
   top: 0;
@@ -577,3 +587,4 @@ header, main, footer {
   height: 100vh;
   object-fit: cover;
 }
+
