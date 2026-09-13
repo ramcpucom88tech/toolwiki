@@ -31,36 +31,32 @@
 </div>
 
   
-
-
 <header>
-  <img src=" images/toolwiki-logo.png" alt="Toolwiki Logo"  class="logo fade-in" >
+  <img src="images/toolwiki-logo.png" alt="Toolwiki Logo" class="logo fade-in">
   <h1>Quick, free utilities for daily life</h1>
-  <p></p>
 </header>
 
-
-
-
-  
- 
 <main>
   <div class="enter-container">
     <a onclick="playTransition()" class="enter-button">Enter</a>
-
   </div>
 </main>
-
-  
-
 
 <footer>
   <p>© <span id="year"></span> Toolwiki · Built for quick utility & ad-supported access.</p>
 </footer>
 
 
+<!-- Transition Video Overlay MUST be here -->
+<div id="transitionVideo" class="fixed inset-0 hidden bg-black z-[9999]">
+  <video id="toolwikiTransition" class="w-full h-full object-cover" muted>
+    <source src="transition.mp4" type="video/mp4">
+  </video>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
+
+
 
 
 
@@ -146,12 +142,7 @@ typeLine();
 </script>
 
 
-<!-- Transition Video Overlay -->
-<div id="transitionVideo" class="fixed inset-0 hidden bg-black z-[9999]">
-  <video id="toolwikiTransition" class="w-full h-full object-cover">
-    <source src="transition.mp4" type="video/mp4">
-  </video>
-</div>
+
 
 
 <script>
