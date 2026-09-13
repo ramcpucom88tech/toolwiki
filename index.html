@@ -43,7 +43,11 @@
 
 <!-- FULLSCREEN TRANSITION VIDEO (TOP Z-INDEX) -->
 <div id="transitionVideo" class="fixed inset-0 hidden bg-black z-[9999]">
-  <video id="toolwikiTransition" class="w-full h-full object-cover" muted>
+  <video id="toolwikiTransition"
+       class="w-full h-full object-cover"
+       muted
+       playsinline
+       style="width:100vw; height:100vh; object-fit:cover;"> >
     <source src="transition.mp4" type="video/mp4">
   </video>
 </div>
