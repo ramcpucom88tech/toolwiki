@@ -118,6 +118,43 @@
       <a href="Merch.html" class="text-slate-200 hover:text-white font-semibold">Merch</a>
     </div>
 
+
+
+<div id="toolwiki-ticker" class="w-full bg-blue-600 text-white text-sm py-2 px-4">
+  <span class="font-semibold">Toolwiki Live Ticker:</span>
+  <span id="ticker-data">Loading...</span>
+</div>
+
+<div id="toolwiki-ticker" class="w-full bg-gradient-to-r from-blue-700 to-indigo-700 text-white text-sm py-2 px-4 shadow-md">
+
+
+
+  
+<script>
+async function updateTicker() {
+  try {
+    const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
+    const data = await res.json();
+    const price = data.bpi.USD.rate;
+    document.getElementById("ticker-data").textContent = `BTC: $${price}`;
+  } catch (e) {
+    document.getElementById("ticker-data").textContent = "Unavailable";
+  }
+}
+
+updateTicker();
+setInterval(updateTicker, 30000); // refresh every 30s
+</script>
+
+
+
+
+
+
+
+
+
+
     <a href="https://buymeacoffee.com/Toolwiki" target="_blank"
        class="bg-yellow-500 text-black px-3 py-1 rounded-md font-semibold hover:bg-yellow-400 text-sm md:text-base">
       ☕ Support Toolwiki
