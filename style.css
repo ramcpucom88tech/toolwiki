@@ -62,11 +62,7 @@ header p {
 
 
 
-.enter-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5px;
-}
+
 
 .enter-button {
   padding: 12px 28px;
