@@ -621,3 +621,15 @@ body {
   background: rgba(0, 0, 0, 0.25);
   z-index: 5;
 }
+
+
+
+
+#tagline {
+  background: rgba(255, 255, 255, 0.85); /* soft white */
+  color: #000; /* black text for contrast */
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: inline-block;
+  backdrop-filter: blur(4px); /* optional soft blur */
+}
