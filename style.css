@@ -548,17 +548,22 @@ body {
 
 /* Enter button */
 .enter-button {
-  padding: 12px 28px;
+  width: 80px;          /* make width equal to height */
+  height: 80px;
+  border-radius: 50%;   /* perfect circle */
   background: #00eaff;
   color: #000;
-  font-size: 1.3rem;
-  border-radius:999px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;         /* centers the text */
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
-  font-weight: bold;
   position: relative;
   z-index: 20;
 }
+
 
 /* Soft blur behind Enter button */
 .blur-wrap {
