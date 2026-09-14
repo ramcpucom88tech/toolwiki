@@ -505,14 +505,7 @@ button:hover {
 
 
 
-#transitionVideo video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-}
+
 
 
 
@@ -609,4 +602,22 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.98); }
   to { opacity: 1; transform: scale(1); }
+}
+
+
+
+/* Blur behind Enter button */
+.blur-wrap {
+  position: relative;
+}
+
+.blur-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 5;
 }
