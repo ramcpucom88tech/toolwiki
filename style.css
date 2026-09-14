@@ -563,7 +563,7 @@ body {
 .blur-wrap::before {
   content: "";
   position: absolute;
-  inset: -20px;
+  inset:0;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
