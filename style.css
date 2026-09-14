@@ -633,3 +633,10 @@ body {
   display: inline-block;
   backdrop-filter: blur(4px); /* optional soft blur */
 }
+
+
+
+
+.enter-btn a {
+  text-decoration: none !important;
+}
