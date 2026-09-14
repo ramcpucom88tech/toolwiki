@@ -552,7 +552,7 @@ body {
   background: #00eaff;
   color: #000;
   font-size: 1.3rem;
-  border-radius: 10px;
+  border-radius:999px;
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
