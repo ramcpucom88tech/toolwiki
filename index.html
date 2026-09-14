@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
+          crossorigin="anonymous"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
-<link rel="icon" type="image/png" href="images/toolwiki-favicon.png">
+  <link rel="icon" type="image/png" href="images/toolwiki-favicon.png">
 
-
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Toolwiki</title>
@@ -16,44 +17,42 @@
 </head>
 
 <body>
-<canvas id="matrix"></canvas>
 
-<div id="boot-overlay">
+<!-- MATRIX BACKGROUND (LOW Z-INDEX) -->
+<canvas id="matrix" style="position:fixed; top:0; left:0; z-index:1;"></canvas>
+
+<!-- BOOT OVERLAY (MID Z-INDEX) -->
+<div id="boot-overlay" style="position:fixed; inset:0; z-index:100;">
   <div id="boot-text"></div>
 </div>
 
-  
-
-
-<header>
-  <img src="images/toolwiki-logo.png" alt="Toolwiki Logo"  class="logo fade-in" >
+<header style="position:relative; z-index:200;">
+  <img src="images/toolwiki-logo.png" alt="Toolwiki Logo" class="logo fade-in">
   <h1>Quick, free utilities for daily life</h1>
-  <p></p>
 </header>
 
-
-
-
-  <main>
- 
-<main>
+<main style="position:relative; z-index:200;">
   <div class="enter-container">
-    <a href="tools.html" class="enter-button">Enter</a>
+    <a onclick="playTransition()" class="enter-button">Enter</a>
   </div>
 </main>
 
-  </main>
-
-
-<footer>
+<footer style="position:relative; z-index:200;">
   <p>© <span id="year"></span> Toolwiki · Built for quick utility & ad-supported access.</p>
 </footer>
 
+<!-- FULLSCREEN TRANSITION VIDEO (TOP Z-INDEX) -->
+<div id="transitionVideo" class="fixed inset-0 hidden bg-black z-[9999]">
+  <video id="toolwikiTransition"
+       class="w-full h-full object-cover"
+       
+       playsinline
+       style="width:100vw; height:100vh; object-fit:cover;"> >
+    <source src="transition.mp4" type="video/mp4">
+  </video>
+</div>
 
-
-  <script src="script.js"></script>
-
-
+<script src="script.js"></script>
 
 <script>
 const canvas = document.getElementById("matrix");
@@ -73,7 +72,7 @@ function drawMatrix() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle ="#38bdf8" ; /* Toolwiki neon blue */
+  ctx.fillStyle ="#38bdf8";
   ctx.font = fontSize + "px monospace";
 
   drops.forEach((y, i) => {
@@ -95,8 +94,6 @@ window.addEventListener("resize", () => {
 });
 </script>
 
-
-
 <script>
 const bootLines = [
   "Toolwiki Systems v3.2.1",
@@ -112,13 +109,12 @@ const bootLines = [
 let index = 0;
 const bootText = document.getElementById("boot-text");
 const bootOverlay = document.getElementById("boot-overlay");
-const landingContent = document.querySelector(".landing-content");
 
 function typeLine() {
   if (index < bootLines.length) {
     bootText.textContent += bootLines[index] + "\n";
     index++;
-    setTimeout(typeLine, 400); // typing speed
+    setTimeout(typeLine, 400);
   } else {
     setTimeout(() => {
       bootOverlay.style.opacity = "0";
@@ -126,7 +122,6 @@ function typeLine() {
 
       setTimeout(() => {
         bootOverlay.style.display = "none";
-        landingContent.style.opacity = "1";
       }, 1000);
 
     }, 800);
@@ -136,60 +131,19 @@ function typeLine() {
 typeLine();
 </script>
 
-
-
-
-
 <script>
-  // Redirect after 20 seconds
-  setTimeout(() => {
-    window.location.href = "tools.html"; 
-  }, 20000);
+  function playTransition() {
+    const overlay = document.getElementById("transitionVideo");
+    const video = document.getElementById("toolwikiTransition");
+
+    overlay.classList.remove("hidden");
+    video.play();
+
+    video.onended = () => {
+      window.location.href = "tools.html";
+    };
+  }
 </script>
-
-
-
-
-
-
-
-
 
 </body>
 </html>
-
-
-
-
-
-
-"C:\Users\ramcp\Desktop\Toolwiki\index.html"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
