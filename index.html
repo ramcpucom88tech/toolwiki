@@ -27,7 +27,8 @@
 </div>
 
 <header style="position:relative; z-index:200;">
-  <img src="images/toolwiki-logo.png" alt="Toolwiki Logo" class="logo fade-in">
+  <img id="toolwikiLogo" src="images/toolwiki-logo.png" alt="Toolwiki Logo" class="logo fade-in">
+
   <h1>Quick, free utilities for daily life</h1>
 </header>
 
@@ -133,14 +134,20 @@ typeLine();
 
 <script>
   function playTransition() {
-    const overlay = document.getElementById("transitionVideo");
-    const video = document.getElementById("toolwikiTransition");
+  // Hide the logo
+  document.getElementById("toolwikiLogo").style.display = "none";
 
-    overlay.classList.remove("hidden");
-    video.play();
+  // Hide matrix if needed
+  // document.getElementById("matrix").style.display = "none";
 
-    video.onended = () => {
-      window.location.href = "tools.html";
+  const overlay = document.getElementById("transitionVideo");
+  const video = document.getElementById("toolwikiTransition");
+
+  overlay.style.display = "block";
+  video.play();
+
+  video.onended = () => {
+    window.location.href = "tools.html";
     };
   }
 </script>
