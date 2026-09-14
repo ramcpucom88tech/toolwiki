@@ -129,13 +129,14 @@
 
 
 
-  
+
 <script>
 async function updateTicker() {
   try {
-    const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice.json");
+    const res = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols=BTC-USD");
     const data = await res.json();
-    const price = data.bpi.USD.rate;
+    const result = data.quoteResponse.result[0];
+    const price = result.regularMarketPrice.toFixed(2);
     document.getElementById("ticker-data").textContent = `BTC: $${price}`;
   } catch (e) {
     document.getElementById("ticker-data").textContent = "Unavailable";
@@ -143,7 +144,8 @@ async function updateTicker() {
 }
 
 updateTicker();
-setInterval(updateTicker, 30000); // refresh every 30s
+setInterval(updateTicker, 30000);
+
 </script>
 
 
