@@ -557,6 +557,18 @@ body {
 }
 
 
+.enter-button:hover {
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.9),
+              0 0 45px rgba(0, 234, 255, 0.7),
+              0 0 65px rgba(0, 234, 255, 0.5);
+  transform: scale(1.05);
+}
+
+
+
+
+
+
 /* Soft blur behind Enter button */
 .blur-wrap {
   position: relative;
