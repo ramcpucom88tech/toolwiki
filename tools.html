@@ -120,10 +120,10 @@
 
 
 
-<div id="toolwiki-ticker" class="w-center bg-gradient-to-r from-blue-700 to-indigo-700 text-white text-sm py-2 px-4 shadow-md">
-
-  <span class="font-semibold">Toolwiki Live Ticker:</span>
-  <span id="ticker-data">Loading...</span>
+<div class="w-full flex justify-center py-2">
+  <div id="toolwiki-ticker" class="bg-blue-600 text-white text-sm px-4 py-1 rounded">
+    <span id="ticker-data">Loading...</span>
+  </div>
 </div>
 
 
@@ -132,19 +132,55 @@
 
 
 <script>
-async function updateTicker() {
+async function getBTC() {
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+  const data = await res.json();
+  return data.bitcoin.usd.toFixed(2);
+}
+
+async function getETH() {
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
+  const data = await res.json();
+  return data.ethereum.usd.toFixed(2);
+}
+
+async function getSP500() {
   try {
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-    const data = await res.json();
-    const price = data.bitcoin.usd.toFixed(2);
-    document.getElementById("ticker-data").textContent = `BTC: $${price}`;
-  } catch (e) {
-    document.getElementById("ticker-data").textContent = "Unavailable";
+    const url = "https://api.allorigins.win/get?url=" + encodeURIComponent(
+      "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=demo"
+    );
+
+    const res = await fetch(url);
+    const wrapper = await res.json();
+    const data = JSON.parse(wrapper.contents);
+    const price = data["Global Quote"]["05. price"];
+    return parseFloat(price).toFixed(2);
+  } catch {
+    return "N/A";
   }
+}
+
+// Toolwiki internal stats (local)
+function getToolwikiStats() {
+  const tools = document.querySelectorAll(".tool").length;
+  const visits = localStorage.getItem("toolwiki_visits") || 1;
+  localStorage.setItem("toolwiki_visits", Number(visits) + 1);
+  return { tools, visits };
+}
+
+async function updateTicker() {
+  const btc = await getBTC();
+  const eth = await getETH();
+  const sp = await getSP500();
+  const stats = getToolwikiStats();
+
+  document.getElementById("ticker-data").textContent =
+    `BTC: $${btc} | ETH: $${eth} | S&P: $${sp} | Tools: ${stats.tools} | Visits: ${stats.visits}`;
 }
 
 updateTicker();
 setInterval(updateTicker, 30000);
+
 
 </script>
 
