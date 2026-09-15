@@ -218,7 +218,7 @@ setInterval(updateTicker, 30000);
   </ul>
 </div>
 
-<script> 
+<script>
 async function getJSON(url) {
   const res = await fetch(url);
   return await res.json();
@@ -237,33 +237,35 @@ async function updateMarketDashboard() {
     const eth = crypto.ethereum.usd;
     const gold = crypto.gold.usd;
 
-    // Indexes (Financial Modeling Prep)
-    const nasdaq = await getJSON("https://financialmodelingprep.com/api/v3/quote/^IXIC?apikey=demo");
-    const dow = await getJSON("https://financialmodelingprep.com/api/v3/quote/^DJI?apikey=demo");
-    const oil = await getJSON("https://financialmodelingprep.com/api/v3/quote/CLUSD?apikey=demo");
+    // Indexes + Oil + FX (Financial Modeling Prep - STABLE endpoint)
+    const indexes = await getJSON("https://financialmodelingprep.com/api/v3/quotes/index?apikey=demo");
 
-    // Forex (Financial Modeling Prep)
-    const fx = await getJSON("https://financialmodelingprep.com/api/v3/fx/USD/EUR?apikey=demo");
+    const nasdaq = indexes.find(i => i.symbol === "^IXIC");
+    const dow = indexes.find(i => i.symbol === "^DJI");
+    const sp = indexes.find(i => i.symbol === "^GSPC");
+    const oil = indexes.find(i => i.symbol === "CLUSD");
+    const fx = indexes.find(i => i.symbol === "EURUSD"); // USD/EUR inverse
 
-    // Fear & Greed Index
+    // Fear & Greed Index (stable)
     const fear = await getJSON("https://api.alternative.me/fng/?limit=1");
 
     list.innerHTML = `
-      <li>NASDAQ: ${nasdaq[0].price.toLocaleString()}</li>
-      <li>Dow Jones: ${dow[0].price.toLocaleString()}</li>
+      <li>NASDAQ: ${nasdaq.price.toLocaleString()}</li>
+      <li>Dow Jones: ${dow.price.toLocaleString()}</li>
+      <li>S&P 500: ${sp.price.toLocaleString()}</li>
       <li>Gold: $${gold.toFixed(2)}</li>
-      <li>Oil: $${oil[0].price.toFixed(2)}</li>
-      <li>USD/EUR: ${fx[0].rate.toFixed(4)}</li>
+      <li>Oil: $${oil.price.toFixed(2)}</li>
+      <li>USD/EUR: ${(1 / fx.price).toFixed(4)}</li>
       <li>Fear & Greed Index: ${fear.data[0].value}</li>
     `;
   } catch (e) {
+    console.log(e);
     list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
   }
 }
 
 updateMarketDashboard();
 setInterval(updateMarketDashboard, 60000);
-
 </script>
 
 
