@@ -140,17 +140,7 @@ async function getETH() {
   return data.ethereum.usd.toFixed(2);
 }
 
-async function getSP500() {
-  try {
-    const res = await fetch("https://financialmodelingprep.com/api/v3/quotes/index?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs");
-    const data = await res.json();
 
-    const sp = data.find(i => i.symbol === "^GSPC");
-    return sp.price.toFixed(2);
-  } catch {
-    return "N/A";
-  }
-}
 
 
 // Toolwiki internal stats (local)
