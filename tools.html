@@ -120,12 +120,13 @@
 
 
 
-<div id="toolwiki-ticker" class="w-full bg-blue-600 text-white text-sm py-2 px-4">
+<div id="toolwiki-ticker" class="w-full bg-gradient-to-r from-blue-700 to-indigo-700 text-white text-sm py-2 px-4 shadow-md">
+
   <span class="font-semibold">Toolwiki Live Ticker:</span>
   <span id="ticker-data">Loading...</span>
 </div>
 
-<div id="toolwiki-ticker" class="w-full bg-gradient-to-r from-blue-700 to-indigo-700 text-white text-sm py-2 px-4 shadow-md">
+
 
 
 
@@ -144,8 +145,6 @@ async function updateTicker() {
 
 updateTicker();
 setInterval(updateTicker, 30000);
-
-
 
 </script>
 
