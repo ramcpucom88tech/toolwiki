@@ -198,14 +198,12 @@ setInterval(updateTicker, 30000);
   
 
 <!-- Mini Market Dashboard -->
-<div class="mt-6 w-center max-w-3xl mx-auto bg-slate-900 border border-slate-700 rounded-lg p-4">
+<div class="mt-6 max-w-3xl mx-auto bg-slate-900 border border-slate-700 rounded-lg p-4">
   <h2 class="text-sm font-semibold text-slate-100 tracking-wide mb-3">
-    Mini Market Dashboard
+    Crypto Market Dashboard
   </h2>
 
-  <ul id="market-dashboard" class="space-y-1 text-sm text-slate-200">
-    <li>Loading market data...</li>
-  </ul>
+  <div id="market-dashboard" class="space-y-4"></div>
 </div>
 
 
@@ -2068,11 +2066,19 @@ async function getJSON(url) {
   return await res.json();
 }
 
-async function updateMarketDashboard() {
-  const list = document.getElementById("market-dashboard");
+function priceBar(value, max = 500) {
+  const width = Math.min((value / max) * 100, 100);
+  return `
+    <div class="w-full bg-slate-800 h-2 rounded">
+      <div class="h-2 rounded bg-blue-500" style="width:${width}%"></div>
+    </div>
+  `;
+}
+
+async function updateCryptoDashboard() {
+  const box = document.getElementById("market-dashboard");
 
   try {
-    // Crypto (CoinGecko)
     const crypto = await getJSON(
       "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,dogecoin&vs_currencies=usd"
     );
@@ -2082,20 +2088,47 @@ async function updateMarketDashboard() {
     const sol = crypto.solana.usd;
     const doge = crypto.dogecoin.usd;
 
-    list.innerHTML = `
-      <li>Bitcoin (BTC): $${btc.toLocaleString()}</li>
-      <li>Ethereum (ETH): $${eth.toLocaleString()}</li>
-      <li>Solana (SOL): $${sol.toLocaleString()}</li>
-      <li>Dogecoin (DOGE): $${doge.toFixed(4)}</li>
+    box.innerHTML = `
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <div class="flex justify-between mb-1">
+          <span class="font-semibold">Bitcoin (BTC)</span>
+          <span>$${btc.toLocaleString()}</span>
+        </div>
+        ${priceBar(btc, 100000)}
+      </div>
+
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <div class="flex justify-between mb-1">
+          <span class="font-semibold">Ethereum (ETH)</span>
+          <span>$${eth.toLocaleString()}</span>
+        </div>
+        ${priceBar(eth, 6000)}
+      </div>
+
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <div class="flex justify-between mb-1">
+          <span class="font-semibold">Solana (SOL)</span>
+          <span>$${sol.toLocaleString()}</span>
+        </div>
+        ${priceBar(sol, 500)}
+      </div>
+
+      <div class="p-3 bg-slate-800 rounded-lg">
+        <div class="flex justify-between mb-1">
+          <span class="font-semibold">Dogecoin (DOGE)</span>
+          <span>$${doge.toFixed(4)}</span>
+        </div>
+        ${priceBar(doge, 1)}
+      </div>
     `;
   } catch (e) {
     console.log("Dashboard Error:", e);
-    list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
+    box.innerHTML = `<p class="text-slate-400">Unable to load market data.</p>`;
   }
 }
 
-updateMarketDashboard();
-setInterval(updateMarketDashboard, 60000);
+updateCryptoDashboard();
+setInterval(updateCryptoDashboard, 30000);
 </script>
 
   
