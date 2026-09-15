@@ -127,10 +127,6 @@
 </div>
 
 
-
-
-
-
 <script>
 async function getBTC() {
   const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
@@ -146,8 +142,6 @@ async function getETH() {
 
 async function getSP500() {
   try {
-    async function getSP500() {
-  try {
     const res = await fetch("https://financialmodelingprep.com/api/v3/quote/^GSPC?apikey=demo");
     const data = await res.json();
     return data[0].price.toFixed(2);
@@ -155,7 +149,6 @@ async function getSP500() {
     return "N/A";
   }
 }
-
 
 // Toolwiki internal stats (local)
 function getToolwikiStats() {
@@ -178,6 +171,12 @@ async function updateTicker() {
 updateTicker();
 setInterval(updateTicker, 30000);
 </script>
+
+
+
+
+
+
 
 
 
