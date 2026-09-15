@@ -142,7 +142,7 @@ async function getETH() {
 
 async function getSP500() {
   try {
-    const res = await fetch("https://financialmodelingprep.com/api/v3/quotes/index?apikey=demo");
+    const res = await fetch("https://financialmodelingprep.com/api/v3/quotes/index?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs");
     const data = await res.json();
 
     const sp = data.find(i => i.symbol === "^GSPC");
@@ -218,6 +218,7 @@ setInterval(updateTicker, 30000);
   </ul>
 </div>
 
+
 <script>
 async function getJSON(url) {
   const res = await fetch(url);
@@ -237,16 +238,16 @@ async function updateMarketDashboard() {
     const eth = crypto.ethereum.usd;
     const gold = crypto.gold.usd;
 
-    // Indexes + Oil + FX (Financial Modeling Prep - STABLE endpoint)
-    const indexes = await getJSON("https://financialmodelingprep.com/api/v3/quotes/index?apikey=demo");
+    // Indexes + Oil + FX (Financial Modeling Prep)
+    const indexes = await getJSON("https://financialmodelingprep.com/api/v3/quotes/index?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs");
 
     const nasdaq = indexes.find(i => i.symbol === "^IXIC");
     const dow = indexes.find(i => i.symbol === "^DJI");
     const sp = indexes.find(i => i.symbol === "^GSPC");
     const oil = indexes.find(i => i.symbol === "CLUSD");
-    const fx = indexes.find(i => i.symbol === "EURUSD"); // USD/EUR inverse
+    const fx = indexes.find(i => i.symbol === "EURUSD");
 
-    // Fear & Greed Index (stable)
+    // Fear & Greed Index
     const fear = await getJSON("https://api.alternative.me/fng/?limit=1");
 
     list.innerHTML = `
@@ -267,6 +268,7 @@ async function updateMarketDashboard() {
 updateMarketDashboard();
 setInterval(updateMarketDashboard, 60000);
 </script>
+
 
 
 
