@@ -208,58 +208,7 @@ setInterval(updateTicker, 30000);
   </ul>
 </div>
 
-<script>
-async function getJSON(url) {
-  const res = await fetch(url);
-  return await res.json();
-}
 
-async function updateMarketDashboard() {
-  const list = document.getElementById("market-dashboard");
-
-  try {
-    // Crypto (CoinGecko)
-    const crypto = await getJSON(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,gold&vs_currencies=usd"
-    );
-
-    const btc = crypto.bitcoin.usd;
-    const eth = crypto.ethereum.usd;
-    const gold = crypto.gold.usd;
-
-    // Indexes (FMP)
-    const indexes = await getJSON("https://financialmodelingprep.com/api/v3/quotes/index?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs");
-
-    const nasdaq = indexes.find(i => i.symbol === "^IXIC");
-    const dow = indexes.find(i => i.symbol === "^DJI");
-    const sp = indexes.find(i => i.symbol === "^GSPC");
-    const oil = indexes.find(i => i.symbol === "CLUSD");
-
-    // Forex (FMP)
-    const fxData = await getJSON("https://financialmodelingprep.com/api/v3/fx/USD/EUR?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs");
-    const fx = fxData[0].price;
-
-    // Fear & Greed Index
-    const fear = await getJSON("https://api.alternative.me/fng/?limit=1");
-
-    list.innerHTML = `
-      <li>NASDAQ: ${nasdaq.price.toLocaleString()}</li>
-      <li>Dow Jones: ${dow.price.toLocaleString()}</li>
-      <li>S&P 500: ${sp.price.toLocaleString()}</li>
-      <li>Gold: $${gold.toFixed(2)}</li>
-      <li>Oil: $${oil.price.toFixed(2)}</li>
-      <li>USD/EUR: ${fx.toFixed(4)}</li>
-      <li>Fear & Greed Index: ${fear.data[0].value}</li>
-    `;
-  } catch (e) {
-    console.log("Dashboard Error:", e);
-    list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
-  }
-}
-
-updateMarketDashboard();
-setInterval(updateMarketDashboard, 60000);
-</script>
 
 
 
@@ -2113,6 +2062,67 @@ setInterval(updateMarketDashboard, 60000);
 
 
 
+<script>
+async function getJSON(url) {
+  const res = await fetch(url);
+  return await res.json();
+}
+
+async function updateMarketDashboard() {
+  const list = document.getElementById("market-dashboard");
+
+  try {
+    // Crypto (CoinGecko)
+    const crypto = await getJSON(
+      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,gold&vs_currencies=usd"
+    );
+
+    const btc = crypto.bitcoin.usd;
+    const eth = crypto.ethereum.usd;
+    const gold = crypto.gold.usd;
+
+    // Major Indexes (FMP - FREE endpoint)
+    const indexes = await getJSON(
+      "https://financialmodelingprep.com/api/v3/majors-indexes?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs"
+    );
+
+    const nasdaq = indexes.find(i => i.symbol === "^IXIC");
+    const dow = indexes.find(i => i.symbol === "^DJI");
+    const sp = indexes.find(i => i.symbol === "^GSPC");
+
+    // Oil (FMP - FREE endpoint)
+    const oilData = await getJSON(
+      "https://financialmodelingprep.com/api/v3/commodities?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs"
+    );
+    const oil = oilData.find(i => i.symbol === "CLUSD");
+
+    // Forex (FMP)
+    const fxData = await getJSON(
+      "https://financialmodelingprep.com/api/v3/fx/USD/EUR?apikey=GQYDDTBNQfFmsWnyKuzNcm2ey1wDeVNs"
+    );
+    const fx = fxData[0].price;
+
+    // Fear & Greed Index
+    const fear = await getJSON("https://api.alternative.me/fng/?limit=1");
+
+    list.innerHTML = `
+      <li>NASDAQ: ${nasdaq.price.toLocaleString()}</li>
+      <li>Dow Jones: ${dow.price.toLocaleString()}</li>
+      <li>S&P 500: ${sp.price.toLocaleString()}</li>
+      <li>Gold: $${gold.toFixed(2)}</li>
+      <li>Oil: $${oil.price.toFixed(2)}</li>
+      <li>USD/EUR: ${fx.toFixed(4)}</li>
+      <li>Fear & Greed Index: ${fear.data[0].value}</li>
+    `;
+  } catch (e) {
+    console.log("Dashboard Error:", e);
+    list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
+  }
+}
+
+updateMarketDashboard();
+setInterval(updateMarketDashboard, 60000);
+</script>
 
 
   
