@@ -133,11 +133,9 @@
 <script>
 async function updateTicker() {
   try {
-    const res = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://query1.finance.yahoo.com/v7/finance/quote?symbols=BTC-USD"));
-    const wrapper = await res.json();
-    const data = JSON.parse(wrapper.contents);
-    const result = data.quoteResponse.result[0];
-    const price = result.regularMarketPrice.toFixed(2);
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    const data = await res.json();
+    const price = data.bitcoin.usd.toFixed(2);
     document.getElementById("ticker-data").textContent = `BTC: $${price}`;
   } catch (e) {
     document.getElementById("ticker-data").textContent = "Unavailable";
@@ -146,6 +144,7 @@ async function updateTicker() {
 
 updateTicker();
 setInterval(updateTicker, 30000);
+
 
 
 </script>
