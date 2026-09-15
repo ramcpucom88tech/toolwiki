@@ -208,7 +208,7 @@ setInterval(updateTicker, 30000);
   </header>
 
   
-  
+
 <!-- Mini Market Dashboard -->
 <div class="mt-6 w-center max-w-3xl mx-auto bg-slate-900 border border-slate-700 rounded-lg p-4">
   <h2 class="text-sm font-semibold text-slate-100 tracking-wide mb-3">
@@ -221,91 +221,51 @@ setInterval(updateTicker, 30000);
 </div>
 
 <script> 
-function arrow(prev, current) {
-  if (!prev) return "";
-  return current > prev ? "▲" : current < prev ? "▼" : "•";
-}
-
-let previous = {
-  nasdaq: null,
-  dow: null,
-  gold: null,
-  oil: null,
-  fx: null,
-  fear: null
-};
-
-async function fetchJSON(url) {
-  const res = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(url));
-  const wrapper = await res.json();
-  return JSON.parse(wrapper.contents);
-}
-
-async function getNASDAQ() {
-  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=NDX&apikey=demo");
-  return parseFloat(data["Global Quote"]["05. price"]);
-}
-
-async function getDOW() {
-  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=DJI&apikey=demo");
-  return parseFloat(data["Global Quote"]["05. price"]);
-}
-
-async function getGold() {
-  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=gold&vs_currencies=usd");
-  const data = await res.json();
-  return parseFloat(data.gold.usd);
-}
-
-async function getOil() {
-  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=OIL&apikey=demo");
-  return parseFloat(data["Global Quote"]["05. price"]);
-}
-
-async function getFX() {
-  const data = await fetchJSON("https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=EUR&apikey=demo");
-  return parseFloat(data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
-}
-
-async function getFearGreed() {
-  const res = await fetch("https://fear-and-greed-index.p.rapidapi.com/v1/fgi", {
-    headers: { "X-RapidAPI-Key": "demo" }
-  });
-  const data = await res.json();
-  return parseInt(data.fgi.now.value);
+async function getJSON(url) {
+  const res = await fetch(url);
+  return await res.json();
 }
 
 async function updateMarketDashboard() {
   const list = document.getElementById("market-dashboard");
 
   try {
-    const [nasdaq, dow, gold, oil, fx, fear] = await Promise.all([
-      getNASDAQ(),
-      getDOW(),
-      getGold(),
-      getOil(),
-      getFX(),
-      getFearGreed()
-    ]);
+    // Crypto (CoinGecko)
+    const crypto = await getJSON(
+      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,gold&vs_currencies=usd"
+    );
+
+    const btc = crypto.bitcoin.usd;
+    const eth = crypto.ethereum.usd;
+    const gold = crypto.gold.usd;
+
+    // Indexes (Financial Modeling Prep)
+    const nasdaq = await getJSON("https://financialmodelingprep.com/api/v3/quote/^IXIC?apikey=demo");
+    const dow = await getJSON("https://financialmodelingprep.com/api/v3/quote/^DJI?apikey=demo");
+    const oil = await getJSON("https://financialmodelingprep.com/api/v3/quote/CLUSD?apikey=demo");
+
+    // Forex (Financial Modeling Prep)
+    const fx = await getJSON("https://financialmodelingprep.com/api/v3/fx/USD/EUR?apikey=demo");
+
+    // Fear & Greed Index
+    const fear = await getJSON("https://api.alternative.me/fng/?limit=1");
 
     list.innerHTML = `
-      <li>NASDAQ: ${nasdaq.toLocaleString()} ${arrow(previous.nasdaq, nasdaq)}</li>
-      <li>Dow Jones: ${dow.toLocaleString()} ${arrow(previous.dow, dow)}</li>
-      <li>Gold: $${gold.toFixed(2)} ${arrow(previous.gold, gold)}</li>
-      <li>Oil: $${oil.toFixed(2)} ${arrow(previous.oil, oil)}</li>
-      <li>USD/EUR: ${fx.toFixed(4)} ${arrow(previous.fx, fx)}</li>
-      <li>Fear & Greed Index: ${fear} ${arrow(previous.fear, fear)}</li>
+      <li>NASDAQ: ${nasdaq[0].price.toLocaleString()}</li>
+      <li>Dow Jones: ${dow[0].price.toLocaleString()}</li>
+      <li>Gold: $${gold.toFixed(2)}</li>
+      <li>Oil: $${oil[0].price.toFixed(2)}</li>
+      <li>USD/EUR: ${fx[0].rate.toFixed(4)}</li>
+      <li>Fear & Greed Index: ${fear.data[0].value}</li>
     `;
-
-    previous = { nasdaq, dow, gold, oil, fx, fear };
-
   } catch (e) {
     list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
   }
 }
 
 updateMarketDashboard();
-setInterval(updateMarketDashboard, 60000); // refresh every minute
+setInterval(updateMarketDashboard, 60000);
+
 </script>
 
 
