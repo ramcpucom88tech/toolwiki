@@ -2067,14 +2067,49 @@ async function getJSON(url) {
   return await res.json();
 }
 
+// Store sparkline history
+const history = {
+  bitcoin: [],
+  ethereum: [],
+  solana: [],
+  dogecoin: []
+};
+
 function formatChange(change) {
   const arrow = change >= 0 ? "▲" : "▼";
   const color = change >= 0 ? "text-green-400" : "text-red-400";
   return `<span class="${color}">${arrow} ${change.toFixed(2)}%</span>`;
 }
 
-async function updateCryptoData() {
-  const dashboard = document.getElementById("market-dashboard");
+function generateSparkline(data, positive) {
+  if (data.length < 2) return "";
+
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+
+  const points = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * 120;
+    const y = 30 - ((v - min) / (max - min)) * 30;
+    return `${x},${y}`;
+  }).join(" ");
+
+  const color = positive ? "#4ade80" : "#f87171"; // green/red
+
+  return `
+    <svg width="120" height="30">
+      <polyline 
+        points="${points}" 
+        fill="none" 
+        stroke="${color}" 
+        stroke-width="2"
+        style="transition: all 0.3s ease;"
+      />
+    </svg>
+  `;
+}
+
+async function updateCryptoDashboard() {
+  const box = document.getElementById("market-dashboard");
   const ticker = document.getElementById("ticker-data");
 
   try {
@@ -2083,15 +2118,24 @@ async function updateCryptoData() {
     );
 
     const coins = {
-      btc: crypto.find(c => c.id === "bitcoin"),
-      eth: crypto.find(c => c.id === "ethereum"),
-      sol: crypto.find(c => c.id === "solana"),
-      doge: crypto.find(c => c.id === "dogecoin")
+      bitcoin: crypto.find(c => c.id === "bitcoin"),
+      ethereum: crypto.find(c => c.id === "ethereum"),
+      solana: crypto.find(c => c.id === "solana"),
+      dogecoin: crypto.find(c => c.id === "dogecoin")
     };
 
-    // Update dashboard
-    dashboard.innerHTML = `
-      ${Object.values(coins).map(coin => `
+    // Update sparkline history
+    Object.keys(coins).forEach(key => {
+      history[key].push(coins[key].current_price);
+      if (history[key].length > 20) history[key].shift(); // keep last 20 points
+    });
+
+    // Build dashboard
+    box.innerHTML = Object.values(coins).map(coin => {
+      const trendUp = coin.price_change_percentage_24h >= 0;
+      const spark = generateSparkline(history[coin.id], trendUp);
+
+      return `
         <div class="p-3 bg-slate-800 rounded-lg flex items-center gap-4">
           <img src="${coin.image}" class="w-10 h-10 rounded-full" alt="${coin.name}">
           <div class="flex-1">
@@ -2099,31 +2143,31 @@ async function updateCryptoData() {
               <span class="font-semibold">${coin.name} (${coin.symbol.toUpperCase()})</span>
               <span>$${coin.current_price.toLocaleString()}</span>
             </div>
-            <div class="mt-1">
-              ${formatChange(coin.price_change_percentage_24h)}
-            </div>
+            <div class="mt-1">${formatChange(coin.price_change_percentage_24h)}</div>
+            <div class="mt-2">${spark}</div>
           </div>
         </div>
-      `).join("")}
-    `;
+      `;
+    }).join("");
 
     // Update ticker
     ticker.textContent =
-      `BTC: $${coins.btc.current_price.toLocaleString()} ${coins.btc.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `ETH: $${coins.eth.current_price.toLocaleString()} ${coins.eth.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `SOL: $${coins.sol.current_price.toLocaleString()} ${coins.sol.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `DOGE: $${coins.doge.current_price.toFixed(4)} ${coins.doge.price_change_percentage_24h >= 0 ? "▲" : "▼"}`;
-      
+      `BTC: $${coins.bitcoin.current_price.toLocaleString()} ${coins.bitcoin.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+      `ETH: $${coins.ethereum.current_price.toLocaleString()} ${coins.ethereum.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+      `SOL: $${coins.solana.current_price.toLocaleString()} ${coins.solana.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+      `DOGE: $${coins.dogecoin.current_price.toFixed(4)} ${coins.dogecoin.price_change_percentage_24h >= 0 ? "▲" : "▼"}`;
+
   } catch (e) {
-    console.log("Crypto Error:", e);
-    dashboard.innerHTML = `<p class="text-slate-400">Unable to load market data.</p>`;
+    console.log("Dashboard Error:", e);
+    box.innerHTML = `<p class="text-slate-400">Unable to load market data.</p>`;
     ticker.textContent = "Unable to load crypto data";
   }
 }
 
-updateCryptoData();
-setInterval(updateCryptoData, 30000);
+updateCryptoDashboard();
+setInterval(updateCryptoDashboard, 30000);
 </script>
+
 
 
   
