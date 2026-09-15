@@ -207,6 +207,115 @@ setInterval(updateTicker, 30000);
     <p class="text-slate-400 mt-1"></p>
   </header>
 
+
+
+<div class="mt-6 w-center max-w-3xl mx-auto bg-slate-900 border border-slate-700 rounded-lg p-4">
+  <h2 class="text-sm font-semibold text-slate-100 tracking-wide mb-3">
+    Mini Market Dashboard
+  </h2>
+
+  <ul id="market-dashboard" class="space-y-1 text-sm text-slate-200">
+    <li>Loading market data...</li>
+  </ul>
+</div>
+
+<script> 
+function arrow(prev, current) {
+  if (!prev) return "";
+  return current > prev ? "▲" : current < prev ? "▼" : "•";
+}
+
+let previous = {
+  nasdaq: null,
+  dow: null,
+  gold: null,
+  oil: null,
+  fx: null,
+  fear: null
+};
+
+async function fetchJSON(url) {
+  const res = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(url));
+  const wrapper = await res.json();
+  return JSON.parse(wrapper.contents);
+}
+
+async function getNASDAQ() {
+  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=NDX&apikey=demo");
+  return parseFloat(data["Global Quote"]["05. price"]);
+}
+
+async function getDOW() {
+  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=DJI&apikey=demo");
+  return parseFloat(data["Global Quote"]["05. price"]);
+}
+
+async function getGold() {
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=gold&vs_currencies=usd");
+  const data = await res.json();
+  return parseFloat(data.gold.usd);
+}
+
+async function getOil() {
+  const data = await fetchJSON("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=OIL&apikey=demo");
+  return parseFloat(data["Global Quote"]["05. price"]);
+}
+
+async function getFX() {
+  const data = await fetchJSON("https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=EUR&apikey=demo");
+  return parseFloat(data["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
+}
+
+async function getFearGreed() {
+  const res = await fetch("https://fear-and-greed-index.p.rapidapi.com/v1/fgi", {
+    headers: { "X-RapidAPI-Key": "demo" }
+  });
+  const data = await res.json();
+  return parseInt(data.fgi.now.value);
+}
+
+async function updateMarketDashboard() {
+  const list = document.getElementById("market-dashboard");
+
+  try {
+    const [nasdaq, dow, gold, oil, fx, fear] = await Promise.all([
+      getNASDAQ(),
+      getDOW(),
+      getGold(),
+      getOil(),
+      getFX(),
+      getFearGreed()
+    ]);
+
+    list.innerHTML = `
+      <li>NASDAQ: ${nasdaq.toLocaleString()} ${arrow(previous.nasdaq, nasdaq)}</li>
+      <li>Dow Jones: ${dow.toLocaleString()} ${arrow(previous.dow, dow)}</li>
+      <li>Gold: $${gold.toFixed(2)} ${arrow(previous.gold, gold)}</li>
+      <li>Oil: $${oil.toFixed(2)} ${arrow(previous.oil, oil)}</li>
+      <li>USD/EUR: ${fx.toFixed(4)} ${arrow(previous.fx, fx)}</li>
+      <li>Fear & Greed Index: ${fear} ${arrow(previous.fear, fear)}</li>
+    `;
+
+    previous = { nasdaq, dow, gold, oil, fx, fear };
+
+  } catch (e) {
+    list.innerHTML = `<li class="text-slate-400">Unable to load market data.</li>`;
+  }
+}
+
+updateMarketDashboard();
+setInterval(updateMarketDashboard, 60000); // refresh every minute
+</script>
+
+
+
+
+
+
+
+
+
+
   <!-- Ad Slot -->
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5057632351845136"
      crossorigin="anonymous"></script>
