@@ -567,3 +567,43 @@ button:hover {
   background: #00bcd4;
   box-shadow: 0 0 12px rgba(0,234,255,0.6);
 }
+
+
+
+
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 10px #00bfff, 0 0 20px #ff00ff; }
+  50% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #00bfff; }
+}
+
+@keyframes gradientShift {
+  0% { background: linear-gradient(90deg, #00bfff, #ff00ff); }
+  50% { background: linear-gradient(90deg, #ff00ff, #00bfff); }
+  100% { background: linear-gradient(90deg, #00bfff, #ff00ff); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.toolwiki-theme {
+  animation: gradientShift 10s linear infinite;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.live-panel {
+  border: 1px solid #1e1e2f;
+  animation: neonPulse 4s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #fff, #00bfff, #fff);
+  background-size: 200px 100%;
+  animation: shimmer 2s linear infinite;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
