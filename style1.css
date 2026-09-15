@@ -607,3 +607,84 @@ button:hover {
   color: transparent;
 }
 
+
+
+
+
+
+
+
+
+
+
+/* Floating Owl */
+.toolwiki-owl {
+  position: fixed;
+  left: 20px;
+  top: 140px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/img/toolwiki-owl.png'); /* your owl logo path */
+  background-size: cover;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px rgba(0,150,255,0.7));
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* Glowing Badge */
+.toolwiki-badge {
+  position: fixed;
+  right: 20px;
+  top: 220px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #3b82f6; }
+  50% { box-shadow: 0 0 22px #0ea5e9; }
+  100% { box-shadow: 0 0 10px #3b82f6; }
+}
+
+/* Neon Borders */
+.neon-left, .neon-right {
+  position: fixed;
+  top: 0;
+  width: 3px;
+  height: 100vh;
+  background: #3b82f6;
+  box-shadow: 0 0 18px #3b82f6;
+  animation: pulse 4s infinite;
+  z-index: 5;
+}
+
+.neon-left { left: 0; }
+.neon-right { right: 0; }
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Optional subtle grid background behind main content */
+body {
+  background-color: #020617; /* slate-950 */
+  background-image:
+    linear-gradient(rgba(30,64,175,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,64,175,0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+

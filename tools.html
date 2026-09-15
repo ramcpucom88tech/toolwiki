@@ -111,6 +111,22 @@
 
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
+<!-- Floating Owl -->
+<div class="toolwiki-owl"></div>
+
+<!-- Glowing Badge -->
+<div class="toolwiki-badge">TOOLWIKI UTILITIES</div>
+
+<!-- Neon Borders -->
+<div class="neon-left"></div>
+<div class="neon-right"></div>
+
+
+
+
+
+
+
   <!-- Navbar -->
   <nav class="w-full bg-slate-800 border-b border-slate-700 px-4 md:px-6 py-3 md:py-4 flex flex-wrap justify-between items-center gap-3">
     <div class="flex items-center gap-4">
@@ -2060,14 +2076,12 @@ setInterval(updateTicker, 30000);
 </script>
 
 
-
 <script>
 async function getJSON(url) {
   const res = await fetch(url);
   return await res.json();
 }
 
-// Store sparkline history
 const history = {
   bitcoin: [],
   ethereum: [],
@@ -2086,14 +2100,13 @@ function generateSparkline(data, positive) {
 
   const max = Math.max(...data);
   const min = Math.min(...data);
-
   const points = data.map((v, i) => {
     const x = (i / (data.length - 1)) * 120;
-    const y = 30 - ((v - min) / (max - min)) * 30;
+    const y = 30 - ((v - min) / (max - min || 1)) * 30;
     return `${x},${y}`;
   }).join(" ");
 
-  const color = positive ? "#4ade80" : "#f87171"; // green/red
+  const color = positive ? "#4ade80" : "#f87171";
 
   return `
     <svg width="120" height="30">
@@ -2124,13 +2137,11 @@ async function updateCryptoDashboard() {
       dogecoin: crypto.find(c => c.id === "dogecoin")
     };
 
-    // Update sparkline history
     Object.keys(coins).forEach(key => {
       history[key].push(coins[key].current_price);
-      if (history[key].length > 20) history[key].shift(); // keep last 20 points
+      if (history[key].length > 20) history[key].shift();
     });
 
-    // Build dashboard
     box.innerHTML = Object.values(coins).map(coin => {
       const trendUp = coin.price_change_percentage_24h >= 0;
       const spark = generateSparkline(history[coin.id], trendUp);
@@ -2140,33 +2151,36 @@ async function updateCryptoDashboard() {
           <img src="${coin.image}" class="w-10 h-10 rounded-full" alt="${coin.name}">
           <div class="flex-1">
             <div class="flex justify-between">
-              <span class="font-semibold">${coin.name} (${coin.symbol.toUpperCase()})</span>
-              <span>$${coin.current_price.toLocaleString()}</span>
+              <span class="font-semibold text-slate-100">${coin.name} (${coin.symbol.toUpperCase()})</span>
+              <span class="text-slate-50">$${coin.current_price.toLocaleString()}</span>
             </div>
-            <div class="mt-1">${formatChange(coin.price_change_percentage_24h)}</div>
+            <div class="mt-1 text-xs">
+              ${formatChange(coin.price_change_percentage_24h)}
+            </div>
             <div class="mt-2">${spark}</div>
           </div>
         </div>
       `;
     }).join("");
 
-    // Update ticker
-    ticker.textContent =
-      `BTC: $${coins.bitcoin.current_price.toLocaleString()} ${coins.bitcoin.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `ETH: $${coins.ethereum.current_price.toLocaleString()} ${coins.ethereum.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `SOL: $${coins.solana.current_price.toLocaleString()} ${coins.solana.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
-      `DOGE: $${coins.dogecoin.current_price.toFixed(4)} ${coins.dogecoin.price_change_percentage_24h >= 0 ? "▲" : "▼"}`;
-
+    if (ticker) {
+      ticker.textContent =
+        `BTC: $${coins.bitcoin.current_price.toLocaleString()} ${coins.bitcoin.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+        `ETH: $${coins.ethereum.current_price.toLocaleString()} ${coins.ethereum.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+        `SOL: $${coins.solana.current_price.toLocaleString()} ${coins.solana.price_change_percentage_24h >= 0 ? "▲" : "▼"} | ` +
+        `DOGE: $${coins.dogecoin.current_price.toFixed(4)} ${coins.dogecoin.price_change_percentage_24h >= 0 ? "▲" : "▼"}`;
+    }
   } catch (e) {
     console.log("Dashboard Error:", e);
     box.innerHTML = `<p class="text-slate-400">Unable to load market data.</p>`;
-    ticker.textContent = "Unable to load crypto data";
+    if (ticker) ticker.textContent = "Unable to load crypto data";
   }
 }
 
 updateCryptoDashboard();
 setInterval(updateCryptoDashboard, 30000);
 </script>
+
 
 
 
