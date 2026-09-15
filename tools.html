@@ -154,11 +154,11 @@ function getToolwikiStats() {
 async function updateTicker() {
   const btc = await getBTC();
   const eth = await getETH();
-  const sp = await getSP500();
+  
   const stats = getToolwikiStats();
 
   document.getElementById("ticker-data").textContent =
-    `BTC: $${btc} | ETH: $${eth} | S&P: $${sp} | Tools: ${stats.tools} | Visits: ${stats.visits}`;
+    `BTC: $${btc} | ETH: $${eth} | Tools: ${stats.tools} | Visits: ${stats.visits}`;
 }
 
 updateTicker();
