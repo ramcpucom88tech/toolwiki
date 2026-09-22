@@ -639,7 +639,7 @@ button:hover {
 /* Glowing Badge */
 .toolwiki-badge {
   position: fixed;
-  top: 220px;
+  top: 120px;
   left: 70%;
   transform: translateX(-50%);
   padding: 10px 20px;
