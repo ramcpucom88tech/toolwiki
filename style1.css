@@ -640,7 +640,7 @@ button:hover {
 .toolwiki-badge {
   position: fixed;
   top: 220px;
-  right: 120px;   /* ← adjust this number to move left or right */
+  right: 80px;   /* ← adjust this number to move left or right */
   padding: 10px 20px;
   background: transparent;
   color: #fff;
