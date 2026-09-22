@@ -688,3 +688,62 @@ body {
 }
 
 
+
+
+
+
+/* Animated Background Pattern */
+.toolwiki-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 80%);
+  overflow: hidden;
+}
+
+.toolwiki-bg::before,
+.toolwiki-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
+}
+
+.toolwiki-bg::after {
+  background-image: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.2), transparent 70%);
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-40px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+
+
+
+
+.toolwiki-bg::before {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(59,130,246,0.3) 0%, transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.2) 0%, transparent 25%),
+    linear-gradient(rgba(59,130,246,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 25s linear infinite, particleDrift 12s ease-in-out infinite;
+}
+
+@keyframes particleDrift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -10px); }
+  100% { transform: translate(0, 0); }
+}
