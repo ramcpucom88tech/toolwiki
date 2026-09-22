@@ -19,7 +19,7 @@
 body {
   margin: 0;
   font-family: var(--font-main);
-  background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+  background: transparent;
   color: var(--text);
 }
 
@@ -698,7 +698,7 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: #0f172a; /* fallback dark */
+  background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
 }
 
 /* Moving grid */
@@ -733,6 +733,7 @@ body {
   0%, 100% { opacity: 0.3; }
   50% { opacity: 0.6; }
 }
+
 
 
 
