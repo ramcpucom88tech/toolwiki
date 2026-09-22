@@ -698,11 +698,11 @@ body {
   inset: 0;
   z-index: -1;
   background: radial-gradient(circle at center, #0f172a 0%, #020617 80%);
-  overflow: hidden;
+  pointer-events: none;
 }
 
-.toolwiki-bg::before,
-.toolwiki-bg::after {
+/* Moving grid */
+.toolwiki-bg::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -711,11 +711,17 @@ body {
     linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: gridMove 20s linear infinite;
+  opacity: 0.35;
 }
 
+/* Glow pulse */
 .toolwiki-bg::after {
-  background-image: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.2), transparent 70%);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.25), transparent 70%);
   animation: pulseGlow 6s ease-in-out infinite;
+  opacity: 0.4;
 }
 
 @keyframes gridMove {
@@ -727,6 +733,7 @@ body {
   0%, 100% { opacity: 0.3; }
   50% { opacity: 0.6; }
 }
+
 
 
 
