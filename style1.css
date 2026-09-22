@@ -701,7 +701,7 @@ body {
   background: transparent;
 
  /* Your background image */
-  background-image: url("/toolwiki/toolwiki-bg.png");
+  background-image: url("/toolwiki/.toolwiki-bg.png");
 
   background-size: cover;
   background-position: center;
