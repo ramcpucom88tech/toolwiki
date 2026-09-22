@@ -642,7 +642,7 @@ button:hover {
   right: 20px;
   top: 220px;
   padding: 10px 20px;
-  background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+  background: transparent;
   color: #fff;
   font-weight: 600;
   border-radius: 999px;
