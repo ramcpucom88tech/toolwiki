@@ -697,8 +697,8 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at center, #0f172a 0%, #020617 80%);
   pointer-events: none;
+  background: #0f172a; /* fallback dark */
 }
 
 /* Moving grid */
@@ -707,10 +707,10 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59,130,246,0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px);
+    linear-gradient(rgba(59,130,246,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.12) 1px, transparent 1px);
   background-size: 40px 40px;
-  animation: gridMove 20s linear infinite;
+  animation: gridMove 22s linear infinite;
   opacity: 0.35;
 }
 
@@ -721,7 +721,7 @@ body {
   inset: 0;
   background-image: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.25), transparent 70%);
   animation: pulseGlow 6s ease-in-out infinite;
-  opacity: 0.4;
+  opacity: 0.45;
 }
 
 @keyframes gridMove {
@@ -733,7 +733,6 @@ body {
   0%, 100% { opacity: 0.3; }
   50% { opacity: 0.6; }
 }
-
 
 
 
