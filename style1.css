@@ -698,7 +698,14 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+  background: transparent;
+
+ /* Your background image */
+  background-image: url("/Toolwiki/toolwiki-bg.png");
+
+  background-size: cover;
+  background-position: center;
+
 }
 
 /* Moving grid */
