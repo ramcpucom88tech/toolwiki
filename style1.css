@@ -479,7 +479,7 @@ input#tool-search {
 
 /* Toolwiki Pro Base */
 body {
-  background: #0d0f12;
+  background: transparent;
   color: #fff;
   font-family: 'Inter', sans-serif;
 }
@@ -678,14 +678,7 @@ button:hover {
   100% { opacity: 0.4; }
 }
 
-/* Optional subtle grid background behind main content */
-body {
-  background-color: #020617; /* slate-950 */
-  background-image:
-    linear-gradient(rgba(30,64,175,0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30,64,175,0.12) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
+
 
 
 
@@ -701,7 +694,7 @@ body {
   background: transparent;
 
  /* Your background image */
-  background-image: url("/toolwiki/.toolwiki-bg.png");
+  background-image: url("/toolwiki/toolwiki-bg.png");
 
   background-size: cover;
   background-position: center;
