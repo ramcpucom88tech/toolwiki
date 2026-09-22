@@ -639,8 +639,8 @@ button:hover {
 /* Glowing Badge */
 .toolwiki-badge {
   position: fixed;
-  top: 20px;
-  left: 70%;
+  top: 220px;
+  left: 90%;
   transform: translateX(-50%);
   padding: 10px 20px;
   background: transparent;
